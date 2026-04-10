@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   };
   const dbId = dbMap[type];
   if (!dbId || !token) {
-    return res.status(400).json({ error: 'Missing config', dbId, hasToken: !!token });
+    return res.status(400).json({ error: 'Missing config', hasToken: !!token });
   }
   try {
     const response = await fetch(
