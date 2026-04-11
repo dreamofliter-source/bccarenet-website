@@ -415,164 +415,76 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
 </footer>
 
 <script>
-// Notion에서 데이터 가져오기
-async function fetchFromNotion(type) {
-  try {
-    const res = await fetch(`/api/notion?type=${type}`);
-    const data = await res.json();
-    return data.results || [];
-  } catch (e) {
-    console.error(e);
-    return [];
-  }
-}
-
-function getProp(page, name) {
-  const p = page.properties[name];
-  if (!p) return '';
-  if (p.type === 'title') return p.title.map(t => t.plain_text).join('');
-  if (p.type === 'rich_text') return p.rich_text.map(t => t.plain_text).join('');
-  if (p.type === 'select') return p.select?.name || '';
-  if (p.type === 'date') return p.date?.start || '';
-  if (p.type === 'url') return p.url || '';
-  if (p.type === 'phone_number') return p.phone_number || '';
-  if (p.type === 'files') return p.files?.[0]?.file?.url || p.files?.[0]?.external?.url || '';
-  return '';
-}
-
-// 참여기관 로드
-async function loadOrgs() {
-  const pages = await fetchFromNotion('orgs');
-  document.getElementById('orgs-loading').style.display = 'none';
-  document.getElementById('orgs-content').style.display = 'block';
-
-  const groups = {coop:[],village:[],social:[],comm:[],np:[]};
-  const typeMap = {'협동조합':'coop','마을기업':'village','사회적기업':'social','마을공동체':'comm','비영리조직':'np'};
-
-  pages.forEach(p => {
-    const type = getProp(p, '유형');
-    const key = typeMap[type];
-    if (key) groups[key].push(p);
-  });
-
-  Object.keys(groups).forEach(key => {
-    const grid = document.getElementById('g-' + key);
-    const cnt = document.getElementById('cnt-' + key);
-    if (!grid) return;
-    const items = groups[key].sort((a,b) => getProp(a,'기관명').localeCompare(getProp(b,'기관명')));
-    cnt.textContent = items.length + '개';
-    items.forEach(p => {
-      const name = getProp(p,'기관명');
-      const rep = getProp(p,'대표자');
-      const biz = getProp(p,'주요사업');
-      const desc = getProp(p,'기관소개');
-      const tel = getProp(p,'전화번호');
-      const addr = getProp(p,'주소');
-      const url = getProp(p,'홈페이지');
-
-      const c = document.createElement('div');
-      c.className = 'org-card';
-      c.innerHTML = `
-        <div class="org-top"><div><div class="org-name">${name}</div><div class="org-rep">대표 ${rep}</div></div><span class="chev">▼</span></div>
-        <div class="org-detail">
-          <div class="d-label">주요 사업</div><div class="d-text" style="margin-bottom:5px">${biz}</div>
-          <div class="d-label">기관 소개</div><div class="d-text" style="margin-bottom:5px">${desc}</div>
-          ${tel ? `<div class="d-label">전화</div><div class="d-text" style="margin-bottom:5px">${tel}</div>` : ''}
-          ${addr ? `<div class="d-label">주소</div><div class="d-text" style="margin-bottom:5px">${addr}</div>` : ''}
-          ${url ? `<div class="d-label">홈페이지</div><div class="d-text"><a href="${url}" target="_blank" style="color:var(--green);">${url}</a></div>` : ''}
-        </div>`;
-      c.addEventListener('click', () => c.classList.toggle('open'));
-      grid.appendChild(c);
-    });
-  });
-}
-
-// 사업결과 로드
-let allResults = [];
-let curFilter = '전체';
-
-async function loadResults() {
-  const pages = await fetchFromNotion('results');
-  allResults = pages;
-  document.getElementById('results-loading').style.display = 'none';
-  document.getElementById('result-grid').style.display = 'grid';
-  renderResults();
-}
-
-function renderResults() {
-  const g = document.getElementById('result-grid');
-  g.innerHTML = '';
-  const list = curFilter === '전체' ? allResults : allResults.filter(p => getProp(p,'분류') === curFilter);
-  if (list.length === 0) {
-    g.innerHTML = '<div class="loading">등록된 사업결과가 없습니다.</div>';
-    return;
-  }
-  list.forEach(p => {
-    const title = getProp(p,'사업명');
-    const tag = getProp(p,'분류');
-    const year = getProp(p,'연도');
-    const desc = getProp(p,'내용');
-    const img = getProp(p,'사진');
-    const c = document.createElement('div');
-    c.className = 'result-card';
-    c.innerHTML = `
-      ${img ? `<img src="${img}" alt="${title}">` : ''}
-      <div class="r-year">${year}년</div>
-      <div class="r-tag ${tag}">${tag}</div>
-      <div class="r-card-title">${title}</div>
-      <div class="r-card-desc">${desc}</div>`;
-    g.appendChild(c);
-  });
-}
-
-function filterResult(btn, tag) {
-  document.querySelectorAll('.r-btn').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  curFilter = tag;
-  renderResults();
-}
-
-// 언론보도 로드
+// 언론보도 불러오기
 async function loadNews() {
-  const pages = await fetchFromNotion('news');
-  document.getElementById('news-loading').style.display = 'none';
-  const grid = document.getElementById('news-grid');
-  grid.style.display = 'grid';
-  if (pages.length === 0) {
-    grid.innerHTML = '<div class="loading">등록된 언론보도가 없습니다.</div>';
-    return;
+  try {
+    const res = await fetch('/api/notion?type=news');
+    const data = await res.json();
+
+    const container = document.getElementById('news-grid');
+    container.innerHTML = '';
+
+    data.results.forEach(item => {
+      const p = item.properties;
+
+      const title = p.제목?.title?.[0]?.plain_text || '';
+      const date = p.날짜?.date?.start || '';
+      const source = p.출처?.rich_text?.[0]?.plain_text || '';
+      const summary = p.요약?.rich_text?.[0]?.plain_text || '';
+
+      container.innerHTML += `
+        <div class="news-card">
+          <div class="news-meta">
+            <span class="news-source">${source}</span>
+            <span class="news-date">${date}</span>
+          </div>
+          <div class="news-title">${title}</div>
+          <div class="news-desc">${summary}</div>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.error('뉴스 불러오기 실패:', err);
   }
-  pages.forEach(p => {
-    const title = getProp(p,'제목');
-    const source = getProp(p,'매체명');
-    const date = getProp(p,'보도일');
-    const desc = getProp(p,'내용 요약');
-    const url = getProp(p,'원문 링크');
-    const img = getProp(p,'사진');
-    const c = document.createElement('div');
-    c.className = 'news-card';
-    c.innerHTML = `
-      ${img ? `<img src="${img}" alt="${title}">` : ''}
-      <div class="news-meta"><span class="news-source">${source}</span><span class="news-date">${date}</span></div>
-      <div class="news-title">${title}</div>
-      <div class="news-desc">${desc}</div>
-      ${url ? `<a class="news-link" href="${url}" target="_blank">원문 보기 →</a>` : ''}`;
-    grid.appendChild(c);
-  });
 }
 
-function toggleForm() {
-  document.getElementById('form-box').classList.toggle('open');
+// 사업결과 불러오기
+async function loadResults() {
+  try {
+    const res = await fetch('/api/notion?type=results');
+    const data = await res.json();
+
+    const container = document.getElementById('result-grid');
+    container.innerHTML = '';
+
+    data.results.forEach(item => {
+      const p = item.properties;
+
+      const title = p.사업명?.title?.[0]?.plain_text || '';
+      const type = p.분류?.select?.name || '';
+      const year = p.연도?.number || '';
+      const desc = p.내용?.rich_text?.[0]?.plain_text || '';
+
+      container.innerHTML += `
+        <div class="result-card">
+          <div class="r-year">${year}</div>
+          <div class="r-tag">${type}</div>
+          <div class="r-card-title">${title}</div>
+          <div class="r-card-desc">${desc}</div>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    console.error('사업결과 불러오기 실패:', err);
+  }
 }
 
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links button').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  const tabs = {home:0,about:1,orgs:2,biz:3,join:4,news:5};
-  document.querySelectorAll('.nav-links button')[tabs[id]].classList.add('active');
-  window.scrollTo(0,0);
-}
+// 실행
+loadNews();
+loadResults();
+</script>
 
 // 페이지 로드 시 데이터 가져오기
 loadOrgs();
