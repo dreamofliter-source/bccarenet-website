@@ -128,6 +128,7 @@ function blockText(block) {
   if (type === "child_page") return value.title || "";
   if (type === "bookmark") return value.url || "";
   if (type === "embed") return value.url || "";
+
   if (type === "image") {
     if (value.type === "external") return value.external?.url || "";
     if (value.type === "file") return value.file?.url || "";
@@ -154,7 +155,9 @@ async function serializeBlocks(blockId) {
       item.image =
         value?.type === "external"
           ? value.external?.url || ""
-          : value?.file?.url || "";
+          : value?.type === "file"
+          ? value.file?.url || ""
+          : "";
       item.caption = richTextToPlain(value?.caption || []);
     }
 
@@ -168,10 +171,6 @@ async function serializeBlocks(blockId) {
 
     if (block.type === "code") {
       item.language = block.code?.language || "";
-    }
-
-    if (block.type === "bulleted_list_item" || block.type === "numbered_list_item") {
-      item.checked = undefined;
     }
 
     if (block.type === "to_do") {
@@ -258,6 +257,10 @@ export default async function handler(req, res) {
   try {
     const { type = "news", pageId } = req.query;
 
+    if (!process.env.NOTION_TOKEN) {
+      return res.status(500).json({ error: "NOTION_TOKEN missing" });
+    }
+
     if (pageId) {
       const page = await notion.pages.retrieve({ page_id: pageId });
       const blocks = await serializeBlocks(pageId);
@@ -285,41 +288,6 @@ export default async function handler(req, res) {
     const response = await notion.databases.query({
       database_id: databaseId,
       page_size: 100,
-      sorts:
-        type === "news"
-          ? [{ property: "날짜", direction: "descending" }]
-          : type === "results"
-          ? [{ property: "연도", direction: "descending" }]
-          : undefined,
-    });
-
-    let results = response.results.map(page => normalizePage(page, type));
-
-    results = results.filter(item => item.isPublished !== false);
-
-    return res.status(200).json({
-      type,
-      count: results.length,
-      results,
-    });
-  } catch (error) {
-    console.error("Notion API error:", error);
-
-    return res.status(500).json({
-      error: "Failed to fetch data from Notion",
-      detail: error.message || "Unknown error",
-    });
-  }
-}
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      page_size: 100,
-      sorts:
-        type === "news"
-          ? [{ property: "날짜", direction: "descending" }]
-          : type === "results"
-          ? [{ property: "연도", direction: "descending" }]
-          : undefined,
     });
 
     let results = response.results.map(page => normalizePage(page, type));
