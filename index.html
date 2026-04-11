@@ -23,7 +23,7 @@
     --radius-sm: 8px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); background: var(--bg); }
+  body { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; color: var(--text); background: var(--bg); }
 
   /* NAV */
   nav {
@@ -33,11 +33,11 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: 0.85rem 2rem;
   }
-  .nav-logo { font-size: 13px; font-weight: 700; color: var(--text); }
+  .nav-logo { font-size: 18px; font-weight: 700; color: var(--text); }
   .nav-logo span { color: var(--green); }
   .nav-links { display: flex; gap: 4px; }
   .nav-links button {
-    padding: 6px 14px; font-size: 12px; font-family: inherit;
+    padding: 6px 14px; font-size: 14px; font-family: inherit;
     border-radius: var(--radius-sm); cursor: pointer;
     color: var(--text-sub); border: none; background: none;
     transition: background 0.15s, color 0.15s;
@@ -52,18 +52,19 @@
   /* SECTION */
   .section { padding: 2.5rem 2rem; }
   .section-alt { background: var(--bg-alt); }
-  .sec-title { font-size: 18px; font-weight: 700; margin-bottom: 0.4rem; }
+  .sec-title { font-size: 22px; font-weight: 700; margin-bottom: 0.4rem; }
   .divider { width: 32px; height: 2px; background: var(--green); margin: 0.6rem 0 1.25rem; }
-  .sec-sub { font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 1.5rem; }
+  .sec-sub { font-size: 15px; color: var(--text-sub); line-height: 1.8; margin-bottom: 1.5rem; }
 
   /* HERO */
   .hero { background: var(--green-dark); color: white; padding: 4rem 2rem; text-align: center; }
   .hero-badge {
-    display: inline-block; background: rgba(255,255,255,0.15);
+    display: block; background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
-    padding: 4px 14px; font-size: 11px; margin-bottom: 1rem; color: white;
+    padding: 8px 18px; font-size: 32px; font-weight: 700; line-height: 1.4;
+    margin: 0 auto 1rem; color: white; width: fit-content;
   }
-  .hero h1 { font-size: 24px; font-weight: 700; line-height: 1.5; margin-bottom: 0.75rem; color: white; }
+  .hero h1 { font-size: 32px; font-weight: 700; line-height: 1.5; margin-bottom: 0.75rem; color: white; }
   .hero p { font-size: 14px; line-height: 1.8; max-width: 520px; margin: 0 auto 1.5rem; color: rgba(255,255,255,0.85); }
   .hero-btn {
     display: inline-block; background: white; color: var(--green-dark);
@@ -93,8 +94,8 @@
   /* BG GRID */
   .bg-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .bg-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; border-left: 3px solid var(--green); }
-  .bg-card h3 { font-size: 13px; font-weight: 700; color: var(--green-dark); margin-bottom: 5px; }
-  .bg-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+  .bg-card h3 { font-size: 16px; font-weight: 700; color: var(--green-dark); margin-bottom: 6px; }
+  .bg-card p { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
 
   /* ORG */
   .type-block { margin-bottom: 1.75rem; }
@@ -109,19 +110,19 @@
   .org-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
   .org-card {
     background: white; border: 1px solid var(--border); border-radius: var(--radius-sm);
-    padding: 0.7rem 0.9rem; cursor: pointer; transition: border-color 0.15s;
+    padding: 0.7rem 0.9rem; cursor: default; transition: border-color 0.15s;
   }
   .org-card:hover { border-color: var(--green); }
   .org-card.open { border-color: var(--green); border-width: 1.5px; }
   .org-top { display: flex; justify-content: space-between; align-items: flex-start; }
-  .org-name { font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .org-name { font-size: 17px; font-weight: 700; line-height: 1.4; }
   .org-rep { font-size: 11px; color: var(--text-light); margin-top: 2px; }
   .chev { font-size: 10px; color: var(--text-light); transition: transform 0.2s; flex-shrink: 0; margin-left: 4px; }
   .org-card.open .chev { transform: rotate(180deg); color: var(--green); }
-  .org-detail { display: none; margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid var(--border); }
+  .org-detail { display: block; margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid var(--border); }
   .org-card.open .org-detail { display: block; }
-  .d-label { font-size: 10px; color: var(--green); font-weight: 700; margin-bottom: 2px; }
-  .d-text { font-size: 11px; color: var(--text-sub); line-height: 1.5; }
+  .d-label { font-size: 13px; color: var(--green); font-weight: 700; margin-bottom: 4px; }
+  .d-text { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
 
   /* BIZ */
   .biz-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -131,8 +132,8 @@
     background: var(--green); color: white; font-size: 12px; font-weight: 700;
     align-items: center; justify-content: center; margin-bottom: 0.5rem;
   }
-  .biz-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 0.4rem; }
-  .biz-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+  .biz-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 0.45rem; }
+  .biz-card p { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
   .biz-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.5rem; }
   .biz-tag { background: var(--green-bg); color: var(--green-dark); font-size: 10px; border-radius: 3px; padding: 2px 7px; }
 
@@ -151,9 +152,9 @@
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .task-item.top .task-rank { background: var(--green); color: white; }
-  .task-txt { font-size: 13px; line-height: 1.5; }
+  .task-txt { font-size: 15px; line-height: 1.6; }
   .task-item.top .task-txt { font-weight: 700; color: var(--green-dark); }
-  .task-note { font-size: 11px; color: var(--text-light); margin-top: 8px; text-align: right; }
+  .task-note { font-size: 13px; color: var(--text-light); margin-top: 8px; text-align: right; }
 
   /* DECLARE */
   .decl-header { background: var(--green-dark); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; text-align: center; }
@@ -162,9 +163,9 @@
   .decl-body { display: flex; flex-direction: column; gap: 1rem; }
   .decl-para { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; }
   .decl-para-label { font-size: 10px; color: var(--green); font-weight: 700; margin-bottom: 6px; }
-  .decl-para p { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
+  .decl-para p { font-size: 15px; color: var(--text-sub); line-height: 1.9; }
   .decl-closing { background: var(--green-bg); border-radius: var(--radius); padding: 1.1rem 1.25rem; border-left: 3px solid var(--green); }
-  .decl-closing p { font-size: 13px; color: var(--green-dark); line-height: 1.9; font-weight: 700; }
+  .decl-closing p { font-size: 15px; color: var(--green-dark); line-height: 1.9; font-weight: 700; }
 
   /* TIMELINE */
   .tl { position: relative; padding-left: 2rem; }
@@ -180,8 +181,8 @@
   .tl-dot-inner { width: 6px; height: 6px; border-radius: 50%; background: white; }
   .tl-date { font-size: 11px; color: var(--green-mid); font-weight: 700; margin-bottom: 4px; }
   .tl-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; border-left: 3px solid var(--green); }
-  .tl-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
-  .tl-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+  .tl-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .tl-card p { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
   .tl-item.hi .tl-dot { background: var(--green-dark); }
   .tl-item.hi .tl-card { border-left-color: var(--green-dark); background: var(--green-bg); }
   .tl-item.hi h3 { color: var(--green-dark); }
@@ -198,13 +199,13 @@
     font-size: 13px; font-weight: 700;
     display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.6rem;
   }
-  .join-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 0.5rem; color: var(--green-dark); }
-  .join-card p, .join-card li { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
+  .join-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 0.55rem; color: var(--green-dark); }
+  .join-card p, .join-card li { font-size: 15px; color: var(--text-sub); line-height: 1.8; }
   .join-card ul { padding-left: 1rem; }
   .join-card li { margin-bottom: 2px; }
   .join-contact { background: var(--green-bg); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.5rem; }
   .join-contact h3 { font-size: 13px; font-weight: 700; color: var(--green-dark); margin-bottom: 0.75rem; }
-  .contact-row { display: flex; gap: 0.5rem; margin-bottom: 5px; font-size: 12px; color: var(--text-sub); }
+  .contact-row { display: flex; gap: 0.5rem; margin-bottom: 5px; font-size: 15px; color: var(--text-sub); }
   .contact-label { font-weight: 700; color: var(--green-dark); min-width: 50px; flex-shrink: 0; }
   .join-apply-btn {
     display: block; width: 100%; padding: 14px;
@@ -222,8 +223,8 @@
   .news-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
   .news-source { font-size: 10px; font-weight: 700; color: var(--green); }
   .news-date { font-size: 10px; color: var(--text-light); }
-  .news-title { font-size: 13px; font-weight: 700; line-height: 1.5; margin-bottom: 6px; }
-  .news-desc { font-size: 11px; color: var(--text-sub); line-height: 1.6; }
+  .news-title { font-size: 16px; font-weight: 700; line-height: 1.5; margin-bottom: 6px; }
+  .news-desc { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
   .news-notice {
     background: var(--bg-alt); border: 1px dashed #ccc;
     border-radius: var(--radius-sm); padding: 1rem;
@@ -247,8 +248,8 @@
   .r-tag.네트워크 { background: var(--green-bg); color: var(--green-dark); }
   .r-tag.공동사업 { background: #EEEDFE; color: #26215C; }
   .r-tag.거버넌스 { background: #FAEEDA; color: #412402; }
-  .r-card-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.4; }
-  .r-card-desc { font-size: 11px; color: var(--text-sub); line-height: 1.6; }
+  .r-card-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; line-height: 1.45; }
+  .r-card-desc { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
   .add-btn {
     display: block; width: 100%; padding: 10px; font-size: 13px; font-family: inherit;
     border-radius: var(--radius-sm); border: 1px dashed #ccc;
@@ -292,9 +293,9 @@
   footer { background: var(--green-dark); color: rgba(255,255,255,0.75); padding: 2rem; }
   .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; gap: 1rem; }
   .footer-logo { font-size: 14px; font-weight: 700; color: white; margin-bottom: 0.4rem; line-height: 1.5; }
-  .footer-desc { font-size: 12px; line-height: 1.6; max-width: 320px; }
+  .footer-desc { font-size: 14px; line-height: 1.7; max-width: 320px; }
   .footer-links { display: flex; flex-direction: column; gap: 6px; text-align: right; flex-shrink: 0; }
-  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; cursor: pointer; }
+  .footer-links a { font-size: 14px; color: rgba(255,255,255,0.6); text-decoration: none; cursor: pointer; }
   .footer-links a:hover { color: white; }
   .footer-bottom { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1rem; font-size: 11px; color: rgba(255,255,255,0.4); }
 
@@ -327,13 +328,14 @@
   .detail-grid { display: grid; gap: 10px; }
   .detail-item { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 0.95rem; }
   .detail-label { font-size: 11px; color: var(--green); font-weight: 700; margin-bottom: 4px; }
-  .detail-value { font-size: 13px; line-height: 1.7; color: var(--text-sub); white-space: pre-wrap; word-break: break-word; }
+  .detail-value { font-size: 15px; line-height: 1.8; color: var(--text-sub); white-space: pre-wrap; word-break: break-word; }
 
   @media (max-width: 640px) {
     nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.5rem; }
     .nav-links { flex-wrap: wrap; justify-content: center; }
     .hero { padding: 2.5rem 1rem; }
-    .hero h1 { font-size: 20px; }
+    .hero h1 { font-size: 26px; }
+    .sec-title { font-size: 20px; }
     .section { padding: 2rem 1rem; }
     .vision-row, .biz-grid, .join-grid, .bg-grid { grid-template-columns: 1fr; }
     .roadmap-grid { grid-template-columns: repeat(2, 1fr); }
@@ -341,23 +343,6 @@
     .footer-top { flex-direction: column; }
     .footer-links { text-align: left; }
   }
-
-  .modal-body-wrap { margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem; }
-  .modal-body-title { font-size: 12px; font-weight: 700; color: var(--green-dark); margin-bottom: 0.6rem; }
-  .modal-body { font-size: 13px; line-height: 1.85; color: var(--text-sub); }
-  .modal-body p { margin: 0 0 0.9rem; }
-  .modal-body h1, .modal-body h2, .modal-body h3 { color: var(--text); margin: 1rem 0 0.5rem; line-height: 1.4; }
-  .modal-body h1 { font-size: 20px; }
-  .modal-body h2 { font-size: 17px; }
-  .modal-body h3 { font-size: 15px; }
-  .modal-body ul, .modal-body ol { margin: 0 0 1rem 1.2rem; }
-  .modal-body li { margin-bottom: 0.35rem; }
-  .modal-body blockquote { margin: 0 0 1rem; padding: 0.6rem 0.9rem; border-left: 3px solid var(--green); background: var(--bg-alt); border-radius: var(--radius-sm); }
-  .modal-body img { max-width: 100%; border-radius: var(--radius-sm); margin: 0.4rem 0 0.9rem; }
-  .modal-body a { color: var(--green-dark); }
-  .modal-body pre { white-space: pre-wrap; background: var(--bg-alt); padding: 0.9rem; border-radius: var(--radius-sm); overflow-x: auto; margin-bottom: 1rem; }
-  .modal-loading { font-size: 12px; color: var(--text-light); }
-
 </style>
 </head>
 <body>
@@ -407,6 +392,11 @@
       <div class="biz-card"><div class="biz-num">3</div><h3>공동사업 개발 및 추진</h3><p>각 영역 조직들이 연대하여 지역의 공동 사회 문제를 함께 발굴·설계하고 추진합니다.</p><div class="biz-tags"><span class="biz-tag">공동사업 발굴</span><span class="biz-tag">협력 설계</span><span class="biz-tag">통합 추진</span></div></div>
       <div class="biz-card"><div class="biz-num">4</div><h3>거버넌스</h3><p>부천시·경기도·공공기관과의 민관 협력 체계를 구축하고 사회연대경제 통합돌봄 거버넌스 모델을 만들어갑니다.</p><div class="biz-tags"><span class="biz-tag">민관 협력</span><span class="biz-tag">리빙랩</span><span class="biz-tag">협치 모델</span></div></div>
     </div>
+  </div>
+  <div class="section">
+    <div class="sec-title">사업 결과</div>
+    <div class="divider"></div>
+    <div class="result-grid" id="home-result-grid"></div>
   </div>
 </div>
 
@@ -517,28 +507,7 @@
     <div style="margin-top:2rem;">
       <div class="sec-title" style="font-size:16px;">사업 결과</div>
       <div class="divider"></div>
-      <div class="result-toolbar">
-        <button class="r-btn on" onclick="filterResult(this,'전체')">전체</button>
-        <button class="r-btn" onclick="filterResult(this,'정책')">정책 개발</button>
-        <button class="r-btn" onclick="filterResult(this,'네트워크')">네트워크</button>
-        <button class="r-btn" onclick="filterResult(this,'공동사업')">공동사업</button>
-        <button class="r-btn" onclick="filterResult(this,'거버넌스')">거버넌스</button>
-      </div>
       <div class="result-grid" id="result-grid"></div>
-      <button class="add-btn" onclick="toggleForm()">+ 사업 결과 등록하기</button>
-      <div class="form-box" id="form-box">
-        <div style="font-size:14px;font-weight:700;margin-bottom:1rem;">사업 결과 등록</div>
-        <div class="form-row">
-          <div class="form-group"><label>사업명</label><input type="text" placeholder="사업명을 입력하세요"></div>
-          <div class="form-group"><label>분류</label><select><option>정책</option><option>네트워크</option><option>공동사업</option><option>거버넌스</option></select></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>연도</label><input type="text" placeholder="예: 2026"></div>
-          <div class="form-group"><label>기간</label><input type="text" placeholder="예: 2026.03 ~ 진행중"></div>
-        </div>
-        <div class="form-group" style="margin-bottom:10px;"><label>내용</label><textarea placeholder="사업 결과 및 주요 내용을 입력하세요"></textarea></div>
-        <button class="form-submit">등록하기</button>
-      </div>
     </div>
   </div>
 </div>
@@ -591,10 +560,7 @@
     <img id="modal-thumb" class="modal-thumb" style="display:none;" alt="thumbnail">
     <div class="meta-stack" id="modal-meta"></div>
     <div class="detail-grid" id="modal-details"></div>
-    <div class="modal-body-wrap">
-      <div class="modal-body-title">본문</div>
-      <div class="modal-body" id="modal-body"><div class="modal-loading">본문을 불러오는 중...</div></div>
-    </div>
+    <div class="modal-actions" id="modal-actions" style="display:none;"></div>
   </div>
 </div>
 
@@ -660,7 +626,7 @@ function renderOrgs(gid, items) {
   if (!g) return;
   items.forEach(o => {
     const c = document.createElement('div');
-    c.className = 'org-card';
+    c.className = 'org-card open';
     c.innerHTML = `<div class="org-top"><div><div class="org-name">${o.name}</div><div class="org-rep">대표 ${o.rep}</div></div><span class="chev">▼</span></div><div class="org-detail"><div class="d-label">주요 사업</div><div class="d-text" style="margin-bottom:5px">${o.biz}</div><div class="d-label">기관 소개</div><div class="d-text">${o.desc}</div></div>`;
     c.addEventListener('click', () => c.classList.toggle('open'));
     g.appendChild(c);
@@ -738,53 +704,19 @@ function summarizeDetails(properties, excludeKeys = []) {
   return items;
 }
 
-
-function escapeAttr(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
-
-async function loadDetailBody(pageId) {
-  const bodyEl = document.getElementById('modal-body');
-  if (!bodyEl) return;
-  bodyEl.innerHTML = '<div class="modal-loading">본문을 불러오는 중...</div>';
-
-  if (!pageId) {
-    bodyEl.innerHTML = '<p>연결된 본문이 없습니다.</p>';
-    return;
-  }
-
-  try {
-    const res = await fetch(`/api/notion?pageId=${encodeURIComponent(pageId)}`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-
-    if (data.html) {
-      bodyEl.innerHTML = data.html;
-    } else if (data.plainText) {
-      bodyEl.innerHTML = `<p>${escapeHtml(data.plainText)}</p>`;
-    } else {
-      bodyEl.innerHTML = '<p>등록된 본문이 없습니다.</p>';
-    }
-  } catch (err) {
-    console.error('본문 불러오기 실패:', err);
-    bodyEl.innerHTML = '<p>본문을 불러오지 못했습니다.</p>';
-  }
-}
-
 function openDetailModal(payload) {
   const modal = document.getElementById('detail-modal');
   const titleEl = document.getElementById('modal-title');
   const metaEl = document.getElementById('modal-meta');
   const detailsEl = document.getElementById('modal-details');
   const thumbEl = document.getElementById('modal-thumb');
+  const actionsEl = document.getElementById('modal-actions');
 
   titleEl.textContent = payload.title || '상세 내용';
   metaEl.innerHTML = '';
   detailsEl.innerHTML = '';
+  actionsEl.innerHTML = '';
+  actionsEl.style.display = 'none';
 
   if (payload.thumbnail) {
     thumbEl.src = payload.thumbnail;
@@ -809,9 +741,19 @@ function openDetailModal(payload) {
     detailsEl.appendChild(item);
   });
 
+  if (payload.link) {
+    const linkBtn = document.createElement('a');
+    linkBtn.className = 'modal-link-btn';
+    linkBtn.href = payload.link;
+    linkBtn.target = '_blank';
+    linkBtn.rel = 'noopener noreferrer';
+    linkBtn.textContent = '기사 원문 보기';
+    actionsEl.appendChild(linkBtn);
+    actionsEl.style.display = 'flex';
+  }
+
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
-  loadDetailBody(payload.pageId);
 }
 
 function closeDetailModal() {
@@ -827,14 +769,14 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeDetailModal();
 });
 
-function renderResults() {
-  const g = document.getElementById('result-grid');
+function renderResultsTo(containerId, useFilter = false) {
+  const g = document.getElementById(containerId);
   if (!g) return;
   g.innerHTML = '';
 
-  const list = curFilter === '전체'
-    ? resultsData
-    : resultsData.filter(r => r.tag === curFilter);
+  const list = useFilter && curFilter !== '전체'
+    ? resultsData.filter(r => r.tag === curFilter)
+    : resultsData;
 
   if (!list.length) {
     g.innerHTML = '<div class="news-notice">등록된 사업 결과가 없습니다.</div>';
@@ -863,12 +805,19 @@ function renderResults() {
   });
 }
 
+function renderResults() {
+  renderResultsTo('result-grid', true);
+  renderResultsTo('home-result-grid', false);
+}
+
 async function loadResults() {
   const g = document.getElementById('result-grid');
-  if (!g) return;
+  const hg = document.getElementById('home-result-grid');
+  if (!g && !hg) return;
 
   try {
-    g.innerHTML = '<div class="loading">사업 결과를 불러오는 중...</div>';
+    if (g) g.innerHTML = '<div class="loading">사업 결과를 불러오는 중...</div>';
+    if (hg) hg.innerHTML = '<div class="loading">사업 결과를 불러오는 중...</div>';
     const res = await fetch('/api/notion?type=results');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
@@ -879,9 +828,8 @@ async function loadResults() {
       const p = item.properties || {};
       const title = getPlainText(p.사업명) || getPlainText(p.제목) || '제목 없음';
       const desc = getPlainText(p.요약) || getPlainText(p.내용) || getPlainText(p.설명) || '';
-      const details = summarizeDetails(p, ['사업명', '제목', '요약', '내용', '설명']);
+      const details = summarizeDetails(p, ['사업명', '제목', '요약', '내용', '설명', '공개 여부']);
       return {
-        pageId: item.id,
         year: p.연도?.number ?? '',
         period: getPlainText(p.기간),
         tag: p.분류?.select?.name || p.카테고리?.select?.name || '',
@@ -898,7 +846,9 @@ async function loadResults() {
     renderResults();
   } catch (err) {
     console.error('사업결과 불러오기 실패:', err);
-    g.innerHTML = '<div class="news-notice">사업 결과를 불러오지 못했습니다. Vercel 환경변수와 Notion 연동을 확인해 주세요.</div>';
+    const msg = '<div class="news-notice">사업 결과를 불러오지 못했습니다. Vercel 환경변수와 Notion 연동을 확인해 주세요.</div>';
+    if (g) g.innerHTML = msg;
+    if (hg) hg.innerHTML = msg;
   }
 }
 
@@ -939,7 +889,7 @@ async function loadNews() {
       const desc = getPlainText(p.요약) || getPlainText(p.내용) || '';
       const link = p.링크?.url || '';
       const thumbnail = pickThumbnail(p);
-      const details = summarizeDetails(p, ['제목', '날짜', '출처', '요약', '내용', '링크', '썸네일', '대표이미지', '이미지', '사진']);
+      const details = summarizeDetails(p, ['제목', '날짜', '출처', '요약', '내용', '링크', '썸네일', '대표이미지', '이미지', '사진', '공개 여부']);
 
       const c = document.createElement('div');
       c.className = 'news-card clickable-card';
@@ -955,13 +905,12 @@ async function loadNews() {
       c.addEventListener('click', () => openDetailModal({
         title,
         thumbnail,
-        pageId: item.id,
         meta: [source, date].filter(Boolean),
         details: [
           ...(desc ? [{ label: '요약', value: desc }] : []),
-          ...(link ? [{ label: '링크', value: link }] : []),
           ...details
-        ]
+        ],
+        link
       }));
       g.appendChild(c);
     });
