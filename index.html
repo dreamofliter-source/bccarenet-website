@@ -301,6 +301,34 @@
   /* LOADING */
   .loading { text-align: center; padding: 2rem; color: var(--text-light); font-size: 13px; }
 
+
+  /* DETAIL MODAL */
+  .card-thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm); margin-bottom: 0.75rem; background: var(--bg-alt); border: 1px solid var(--border); }
+  .clickable-card { cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+  .clickable-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+  .meta-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.5rem; }
+  .meta-pill { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 999px; background: var(--bg-alt); color: var(--text-sub); border: 1px solid var(--border); }
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+    display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal-panel {
+    width: min(760px, 100%); max-height: 90vh; overflow: auto;
+    background: white; border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.18); padding: 1.25rem;
+  }
+  .modal-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+  .modal-title { font-size: 20px; font-weight: 700; line-height: 1.5; }
+  .modal-close {
+    border: none; background: var(--bg-alt); cursor: pointer; border-radius: 10px;
+    width: 34px; height: 34px; font-size: 18px; color: var(--text-sub); flex-shrink: 0;
+  }
+  .modal-thumb { width: 100%; max-height: 320px; object-fit: cover; border-radius: var(--radius); margin-bottom: 1rem; border: 1px solid var(--border); background: var(--bg-alt); }
+  .detail-grid { display: grid; gap: 10px; }
+  .detail-item { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 0.95rem; }
+  .detail-label { font-size: 11px; color: var(--green); font-weight: 700; margin-bottom: 4px; }
+  .detail-value { font-size: 13px; line-height: 1.7; color: var(--text-sub); white-space: pre-wrap; word-break: break-word; }
+
   @media (max-width: 640px) {
     nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.5rem; }
     .nav-links { flex-wrap: wrap; justify-content: center; }
@@ -536,6 +564,19 @@
   </div>
 </div>
 
+
+<div class="modal-backdrop" id="detail-modal" onclick="handleModalBackdrop(event)">
+  <div class="modal-panel">
+    <div class="modal-top">
+      <div class="modal-title" id="modal-title">상세 내용</div>
+      <button class="modal-close" onclick="closeDetailModal()" aria-label="닫기">×</button>
+    </div>
+    <img id="modal-thumb" class="modal-thumb" style="display:none;" alt="thumbnail">
+    <div class="meta-stack" id="modal-meta"></div>
+    <div class="detail-grid" id="modal-details"></div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-top">
     <div>
@@ -610,6 +651,7 @@ renderOrgs('g-social', orgs.social);
 renderOrgs('g-comm', orgs.comm);
 renderOrgs('g-np', orgs.np);
 
+
 let resultsData = [];
 let curFilter = '전체';
 
@@ -629,6 +671,103 @@ function getPlainText(prop) {
   return '';
 }
 
+function getFileUrl(prop) {
+  if (!prop?.files?.length) return '';
+  const file = prop.files[0];
+  return file?.file?.url || file?.external?.url || '';
+}
+
+function pickThumbnail(properties) {
+  const candidates = ['썸네일', '대표이미지', '이미지', '사진', 'image', 'thumbnail'];
+  for (const key of candidates) {
+    if (properties[key]) {
+      const url = getFileUrl(properties[key]);
+      if (url) return url;
+    }
+  }
+  return '';
+}
+
+function normalizePropValue(prop) {
+  if (!prop) return '';
+  if (prop.title) return getPlainText(prop);
+  if (prop.rich_text) return getPlainText(prop);
+  if (prop.select) return prop.select?.name || '';
+  if (prop.multi_select) return (prop.multi_select || []).map(v => v.name).join(', ');
+  if (prop.date) return prop.date?.start || '';
+  if (prop.number !== undefined && prop.number !== null) return String(prop.number);
+  if (prop.url) return prop.url;
+  if (prop.email) return prop.email;
+  if (prop.phone_number) return prop.phone_number;
+  if (prop.checkbox !== undefined) return prop.checkbox ? '예' : '아니오';
+  if (prop.status) return prop.status?.name || '';
+  if (prop.relation) return `${prop.relation.length}개 연결`;
+  if (prop.files) return prop.files.map(f => f.name || f.external?.url || f.file?.url || '').join(', ');
+  return '';
+}
+
+function summarizeDetails(properties, excludeKeys = []) {
+  const items = [];
+  Object.entries(properties || {}).forEach(([key, prop]) => {
+    if (excludeKeys.includes(key)) return;
+    const value = normalizePropValue(prop);
+    if (!value) return;
+    items.push({ label: key, value });
+  });
+  return items;
+}
+
+function openDetailModal(payload) {
+  const modal = document.getElementById('detail-modal');
+  const titleEl = document.getElementById('modal-title');
+  const metaEl = document.getElementById('modal-meta');
+  const detailsEl = document.getElementById('modal-details');
+  const thumbEl = document.getElementById('modal-thumb');
+
+  titleEl.textContent = payload.title || '상세 내용';
+  metaEl.innerHTML = '';
+  detailsEl.innerHTML = '';
+
+  if (payload.thumbnail) {
+    thumbEl.src = payload.thumbnail;
+    thumbEl.style.display = 'block';
+  } else {
+    thumbEl.removeAttribute('src');
+    thumbEl.style.display = 'none';
+  }
+
+  (payload.meta || []).forEach(m => {
+    if (!m) return;
+    const span = document.createElement('span');
+    span.className = 'meta-pill';
+    span.textContent = m;
+    metaEl.appendChild(span);
+  });
+
+  (payload.details || []).forEach(d => {
+    const item = document.createElement('div');
+    item.className = 'detail-item';
+    item.innerHTML = `<div class="detail-label">${escapeHtml(d.label)}</div><div class="detail-value">${escapeHtml(d.value)}</div>`;
+    detailsEl.appendChild(item);
+  });
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetailModal() {
+  document.getElementById('detail-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleModalBackdrop(event) {
+  if (event.target.id === 'detail-modal') closeDetailModal();
+}
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeDetailModal();
+});
+
 function renderResults() {
   const g = document.getElementById('result-grid');
   if (!g) return;
@@ -645,10 +784,22 @@ function renderResults() {
 
   list.forEach(r => {
     const c = document.createElement('div');
-    c.className = 'result-card';
+    c.className = 'result-card clickable-card';
     const yearLabel = r.year ? `${escapeHtml(r.year)}년` : '';
     const tagClass = escapeHtml(r.tag || '');
-    c.innerHTML = `<div class="r-year">${yearLabel}</div><div class="r-tag ${tagClass}">${escapeHtml(r.tag)}</div><div class="r-card-title">${escapeHtml(r.title)}</div><div class="r-card-desc">${escapeHtml(r.desc)}</div>`;
+    c.innerHTML = `
+      ${r.thumbnail ? `<img class="card-thumb" src="${escapeHtml(r.thumbnail)}" alt="${escapeHtml(r.title)}">` : ''}
+      <div class="r-year">${yearLabel}</div>
+      <div class="r-tag ${tagClass}">${escapeHtml(r.tag)}</div>
+      <div class="r-card-title">${escapeHtml(r.title)}</div>
+      <div class="r-card-desc">${escapeHtml(r.desc)}</div>
+    `;
+    c.addEventListener('click', () => openDetailModal({
+      title: r.title,
+      thumbnail: r.thumbnail,
+      meta: [r.tag, yearLabel, r.period].filter(Boolean),
+      details: r.details
+    }));
     g.appendChild(c);
   });
 }
@@ -667,11 +818,20 @@ async function loadResults() {
 
     resultsData = rows.map(item => {
       const p = item.properties || {};
+      const title = getPlainText(p.사업명) || getPlainText(p.제목) || '제목 없음';
+      const desc = getPlainText(p.요약) || getPlainText(p.내용) || getPlainText(p.설명) || '';
+      const details = summarizeDetails(p, ['사업명', '제목', '요약', '내용', '설명']);
       return {
         year: p.연도?.number ?? '',
-        tag: p.분류?.select?.name || '',
-        title: getPlainText(p.사업명),
-        desc: getPlainText(p.내용),
+        period: getPlainText(p.기간),
+        tag: p.분류?.select?.name || p.카테고리?.select?.name || '',
+        title,
+        desc,
+        thumbnail: pickThumbnail(p),
+        details: [
+          ...(desc ? [{ label: '내용', value: desc }] : []),
+          ...details
+        ],
       };
     });
 
@@ -713,15 +873,35 @@ async function loadNews() {
     g.innerHTML = '';
     rows.forEach(item => {
       const p = item.properties || {};
-      const title = getPlainText(p.제목);
+      const title = getPlainText(p.제목) || '제목 없음';
       const date = p.날짜?.date?.start || '';
       const source = getPlainText(p.출처);
-      const desc = getPlainText(p.요약);
+      const desc = getPlainText(p.요약) || getPlainText(p.내용) || '';
       const link = p.링크?.url || '';
+      const thumbnail = pickThumbnail(p);
+      const details = summarizeDetails(p, ['제목', '날짜', '출처', '요약', '내용', '링크', '썸네일', '대표이미지', '이미지', '사진']);
 
       const c = document.createElement('div');
-      c.className = 'news-card';
-      c.innerHTML = `<div class="news-meta"><span class="news-source">${escapeHtml(source)}</span><span class="news-date">${escapeHtml(date)}</span></div><div class="news-title">${link ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">${escapeHtml(title)}</a>` : escapeHtml(title)}</div><div class="news-desc">${escapeHtml(desc)}</div>`;
+      c.className = 'news-card clickable-card';
+      c.innerHTML = `
+        ${thumbnail ? `<img class="card-thumb" src="${escapeHtml(thumbnail)}" alt="${escapeHtml(title)}">` : ''}
+        <div class="news-meta">
+          <span class="news-source">${escapeHtml(source)}</span>
+          <span class="news-date">${escapeHtml(date)}</span>
+        </div>
+        <div class="news-title">${escapeHtml(title)}</div>
+        <div class="news-desc">${escapeHtml(desc)}</div>
+      `;
+      c.addEventListener('click', () => openDetailModal({
+        title,
+        thumbnail,
+        meta: [source, date].filter(Boolean),
+        details: [
+          ...(desc ? [{ label: '요약', value: desc }] : []),
+          ...(link ? [{ label: '링크', value: link }] : []),
+          ...details
+        ]
+      }));
       g.appendChild(c);
     });
   } catch (err) {
