@@ -6,174 +6,317 @@
 <title>부천사회연대경제통합돌봄네트워크</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--green-dark:#085041;--green-mid:#0F6E56;--green:#1D9E75;--green-light:#5DCAA5;--green-pale:#9FE1CB;--green-bg:#E1F5EE;--text:#1a1a1a;--text-sub:#555;--text-light:#888;--border:rgba(0,0,0,0.1);--bg:#fff;--bg-alt:#f7f9f8;--radius:12px;--radius-sm:8px;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:var(--bg);}
-nav{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0.85rem 2rem;}
-.nav-logo{font-size:13px;font-weight:700;}
-.nav-logo span{color:var(--green);}
-.nav-links{display:flex;gap:4px;}
-.nav-links button{padding:6px 14px;font-size:12px;font-family:inherit;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-sub);border:none;background:none;transition:background 0.15s,color 0.15s;}
-.nav-links button:hover{background:var(--bg-alt);}
-.nav-links button.active{background:var(--green-bg);color:var(--green-dark);font-weight:500;}
-.page{display:none;}.page.active{display:block;}
-.section{padding:2.5rem 2rem;}.section-alt{background:var(--bg-alt);}
-.sec-title{font-size:18px;font-weight:700;margin-bottom:0.4rem;}
-.divider{width:32px;height:2px;background:var(--green);margin:0.6rem 0 1.25rem;}
-.sec-sub{font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:1.5rem;}
-.hero{background:var(--green-dark);color:white;padding:4rem 2rem;text-align:center;}
-.hero-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:4px 14px;font-size:11px;margin-bottom:1rem;color:white;}
-.hero h1{font-size:24px;font-weight:700;line-height:1.5;margin-bottom:0.75rem;color:white;}
-.hero p{font-size:14px;line-height:1.8;max-width:520px;margin:0 auto 1.5rem;color:rgba(255,255,255,0.85);}
-.hero-btn{display:inline-block;background:white;color:var(--green-dark);border-radius:var(--radius-sm);padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);background:var(--green-mid);}
-.stat-item{padding:1.25rem;text-align:center;border-right:1px solid rgba(255,255,255,0.15);}
-.stat-item:last-child{border-right:none;}
-.stat-num{font-size:24px;font-weight:700;color:white;}
-.stat-label{font-size:11px;color:rgba(255,255,255,0.75);margin-top:3px;}
-.vision-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.25rem;}
-.vision-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;}
-.v-label{font-size:11px;color:var(--green);font-weight:700;margin-bottom:5px;}
-.vision-card p{font-size:12px;color:var(--text-sub);line-height:1.6;}
-.declare-box{background:var(--green-bg);border-radius:var(--radius);padding:1.25rem;border-left:3px solid var(--green);}
-.declare-box p{font-size:13px;color:var(--green-dark);line-height:1.9;font-style:italic;}
-.bg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.bg-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.25rem;border-left:3px solid var(--green);}
-.bg-card h3{font-size:13px;font-weight:700;color:var(--green-dark);margin-bottom:5px;}
-.bg-card p{font-size:12px;color:var(--text-sub);line-height:1.6;}
-.type-block{margin-bottom:1.75rem;}
-.type-hdr{display:flex;align-items:center;gap:8px;margin-bottom:0.6rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
-.type-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;}
-.b-coop{background:var(--green-bg);color:var(--green-dark);}
-.b-village{background:#E6F1FB;color:#042C53;}
-.b-social{background:#EEEDFE;color:#26215C;}
-.b-comm{background:#FAEEDA;color:#412402;}
-.b-np{background:#FAECE7;color:#4A1B0C;}
-.type-cnt{font-size:11px;color:var(--text-light);}
-.org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;}
-.org-card{background:white;border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.7rem 0.9rem;cursor:pointer;transition:border-color 0.15s;}
-.org-card:hover{border-color:var(--green);}
-.org-card.open{border-color:var(--green);border-width:1.5px;}
-.org-top{display:flex;justify-content:space-between;align-items:flex-start;}
-.org-name{font-size:12px;font-weight:700;line-height:1.4;}
-.org-rep{font-size:11px;color:var(--text-light);margin-top:2px;}
-.chev{font-size:10px;color:var(--text-light);transition:transform 0.2s;flex-shrink:0;margin-left:4px;}
-.org-card.open .chev{transform:rotate(180deg);color:var(--green);}
-.org-detail{display:none;margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid var(--border);}
-.org-card.open .org-detail{display:block;}
-.d-label{font-size:10px;color:var(--green);font-weight:700;margin-bottom:2px;}
-.d-text{font-size:11px;color:var(--text-sub);line-height:1.5;}
-.biz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-.biz-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;}
-.biz-num{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--green);color:white;font-size:12px;font-weight:700;align-items:center;justify-content:center;margin-bottom:0.5rem;}
-.biz-card h3{font-size:14px;font-weight:700;margin-bottom:0.4rem;}
-.biz-card p{font-size:12px;color:var(--text-sub);line-height:1.6;}
-.biz-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:0.5rem;}
-.biz-tag{background:var(--green-bg);color:var(--green-dark);font-size:10px;border-radius:3px;padding:2px 7px;}
-.task-list{display:flex;flex-direction:column;gap:8px;}
-.task-item{display:flex;align-items:center;gap:12px;background:white;border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.85rem 1rem;}
-.task-item.top{border-left:3px solid var(--green);}
-.task-rank{width:28px;height:28px;border-radius:50%;background:var(--green-bg);color:var(--green-dark);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.task-item.top .task-rank{background:var(--green);color:white;}
-.task-txt{font-size:13px;line-height:1.5;}
-.task-item.top .task-txt{font-weight:700;color:var(--green-dark);}
-.task-note{font-size:11px;color:var(--text-light);margin-top:8px;text-align:right;}
-.decl-header{background:var(--green-dark);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.25rem;text-align:center;}
-.decl-header h3{font-size:15px;font-weight:700;color:white;margin-bottom:0.5rem;}
-.decl-header p{font-size:12px;color:rgba(255,255,255,0.75);line-height:1.7;}
-.decl-body{display:flex;flex-direction:column;gap:1rem;}
-.decl-para{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.25rem;}
-.decl-para-label{font-size:10px;color:var(--green);font-weight:700;margin-bottom:6px;}
-.decl-para p{font-size:13px;color:var(--text-sub);line-height:1.9;}
-.decl-closing{background:var(--green-bg);border-radius:var(--radius);padding:1.1rem 1.25rem;border-left:3px solid var(--green);}
-.decl-closing p{font-size:13px;color:var(--green-dark);line-height:1.9;font-weight:700;}
-.tl{position:relative;padding-left:2rem;}
-.tl::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--green-pale);}
-.tl-item{position:relative;margin-bottom:1.5rem;}
-.tl-item:last-child{margin-bottom:0;}
-.tl-dot{position:absolute;left:-2rem;top:4px;width:16px;height:16px;border-radius:50%;background:var(--green);border:3px solid var(--bg-alt);display:flex;align-items:center;justify-content:center;}
-.tl-dot-inner{width:6px;height:6px;border-radius:50%;background:white;}
-.tl-date{font-size:11px;color:var(--green-mid);font-weight:700;margin-bottom:4px;}
-.tl-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:0.9rem 1.1rem;border-left:3px solid var(--green);}
-.tl-card h3{font-size:13px;font-weight:700;margin-bottom:3px;}
-.tl-card p{font-size:12px;color:var(--text-sub);line-height:1.6;}
-.tl-item.hi .tl-dot{background:var(--green-dark);}
-.tl-item.hi .tl-card{border-left-color:var(--green-dark);background:var(--green-bg);}
-.tl-item.hi h3{color:var(--green-dark);}
-.join-hero{background:var(--green-dark);border-radius:var(--radius);padding:2rem;text-align:center;margin-bottom:1.5rem;}
-.join-hero h2{font-size:16px;font-weight:700;color:white;margin-bottom:0.4rem;}
-.join-hero p{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;}
-.join-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:1.5rem;}
-.join-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;}
-.join-card-num{width:26px;height:26px;border-radius:50%;background:var(--green-bg);color:var(--green-dark);font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-bottom:0.6rem;}
-.join-card h3{font-size:13px;font-weight:700;margin-bottom:0.5rem;color:var(--green-dark);}
-.join-card p,.join-card li{font-size:12px;color:var(--text-sub);line-height:1.7;}
-.join-card ul{padding-left:1rem;}
-.join-card li{margin-bottom:2px;}
-.join-contact{background:var(--green-bg);border-radius:var(--radius);padding:1.25rem;margin-bottom:1.5rem;}
-.join-contact h3{font-size:13px;font-weight:700;color:var(--green-dark);margin-bottom:0.75rem;}
-.contact-row{display:flex;gap:0.5rem;margin-bottom:5px;font-size:12px;color:var(--text-sub);}
-.contact-label{font-weight:700;color:var(--green-dark);min-width:50px;flex-shrink:0;}
-.join-apply-btn{display:block;width:100%;padding:14px;font-size:15px;font-weight:700;font-family:inherit;border-radius:var(--radius);border:none;background:var(--green);color:white;cursor:pointer;text-align:center;text-decoration:none;transition:background 0.15s;}
-.join-apply-btn:hover{background:var(--green-mid);}
-.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
-.news-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;}
-.news-card img{width:100%;height:140px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:0.75rem;}
-.news-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.news-source{font-size:10px;font-weight:700;color:var(--green);}
-.news-date{font-size:10px;color:var(--text-light);}
-.news-title{font-size:13px;font-weight:700;line-height:1.5;margin-bottom:6px;}
-.news-desc{font-size:11px;color:var(--text-sub);line-height:1.6;}
-.news-link{display:inline-block;margin-top:8px;font-size:11px;color:var(--green);text-decoration:none;}
-.news-link:hover{text-decoration:underline;}
-.news-notice{background:var(--bg-alt);border:1px dashed #ccc;border-radius:var(--radius-sm);padding:1rem;text-align:center;font-size:12px;color:var(--text-light);margin-top:1rem;}
-.result-toolbar{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;}
-.r-btn{padding:5px 12px;font-size:12px;font-family:inherit;border-radius:var(--radius-sm);border:1px solid #ddd;background:white;cursor:pointer;color:var(--text-sub);transition:all 0.15s;}
-.r-btn.on{background:var(--green-bg);color:var(--green-dark);border-color:var(--green-pale);font-weight:700;}
-.result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
-.result-card{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;}
-.result-card img{width:100%;height:120px;object-fit:cover;border-radius:var(--radius-sm);margin-bottom:0.75rem;}
-.r-year{font-size:10px;color:var(--text-light);margin-bottom:4px;}
-.r-tag{display:inline-block;font-size:10px;border-radius:3px;padding:2px 7px;margin-bottom:6px;font-weight:700;}
-.r-tag.정책{background:#E6F1FB;color:#042C53;}
-.r-tag.네트워크{background:var(--green-bg);color:var(--green-dark);}
-.r-tag.공동사업{background:#EEEDFE;color:#26215C;}
-.r-tag.거버넌스{background:#FAEEDA;color:#412402;}
-.r-card-title{font-size:13px;font-weight:700;margin-bottom:4px;line-height:1.4;}
-.r-card-desc{font-size:11px;color:var(--text-sub);line-height:1.6;}
-.add-btn{display:block;width:100%;padding:10px;font-size:13px;font-family:inherit;border-radius:var(--radius-sm);border:1px dashed #ccc;background:none;cursor:pointer;color:var(--green);text-align:center;margin-top:1rem;}
-.add-btn:hover{background:var(--green-bg);}
-.form-box{background:white;border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-top:1rem;display:none;}
-.form-box.open{display:block;}
-.form-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px;}
-.form-group{display:flex;flex-direction:column;gap:4px;}
-.form-group label{font-size:12px;color:var(--text-sub);font-weight:500;}
-.form-group input,.form-group select,.form-group textarea{font-size:13px;font-family:inherit;padding:8px 10px;border:1px solid #ddd;border-radius:var(--radius-sm);background:white;color:var(--text);width:100%;}
-.form-group textarea{min-height:80px;resize:vertical;}
-.form-submit{background:var(--green);color:white;border:none;font-family:inherit;border-radius:var(--radius-sm);padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;}
-.roadmap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:2rem;}
-.roadmap-item{border-radius:var(--radius-sm);padding:1rem;}
-.loading{text-align:center;padding:2rem;color:var(--text-light);font-size:13px;}
-footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
-.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem;gap:1rem;}
-.footer-logo{font-size:14px;font-weight:700;color:white;margin-bottom:0.4rem;}
-.footer-desc{font-size:12px;line-height:1.6;max-width:320px;}
-.footer-links{display:flex;flex-direction:column;gap:6px;text-align:right;flex-shrink:0;}
-.footer-links a{font-size:12px;color:rgba(255,255,255,0.6);text-decoration:none;cursor:pointer;}
-.footer-links a:hover{color:white;}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.15);padding-top:1rem;font-size:11px;color:rgba(255,255,255,0.4);}
-@media(max-width:640px){
-  nav{padding:0.75rem 1rem;flex-direction:column;gap:0.5rem;}
-  .nav-links{flex-wrap:wrap;justify-content:center;}
-  .hero{padding:2.5rem 1rem;}.hero h1{font-size:20px;}
-  .section{padding:2rem 1rem;}
-  .vision-row,.biz-grid,.join-grid,.bg-grid{grid-template-columns:1fr;}
-  .roadmap-grid{grid-template-columns:repeat(2,1fr);}
-  .footer-top{flex-direction:column;}.footer-links{text-align:left;}
-}
+  :root {
+    --green-dark: #085041;
+    --green-mid: #0F6E56;
+    --green: #1D9E75;
+    --green-light: #5DCAA5;
+    --green-pale: #9FE1CB;
+    --green-bg: #E1F5EE;
+    --text: #1a1a1a;
+    --text-sub: #555;
+    --text-light: #888;
+    --border: rgba(0,0,0,0.1);
+    --bg: #fff;
+    --bg-alt: #f7f9f8;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); background: var(--bg); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 2rem;
+  }
+  .nav-logo { font-size: 13px; font-weight: 700; color: var(--text); }
+  .nav-logo span { color: var(--green); }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-links button {
+    padding: 6px 14px; font-size: 12px; font-family: inherit;
+    border-radius: var(--radius-sm); cursor: pointer;
+    color: var(--text-sub); border: none; background: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-links button:hover { background: var(--bg-alt); }
+  .nav-links button.active { background: var(--green-bg); color: var(--green-dark); font-weight: 500; }
+
+  /* PAGE */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* SECTION */
+  .section { padding: 2.5rem 2rem; }
+  .section-alt { background: var(--bg-alt); }
+  .sec-title { font-size: 18px; font-weight: 700; margin-bottom: 0.4rem; }
+  .divider { width: 32px; height: 2px; background: var(--green); margin: 0.6rem 0 1.25rem; }
+  .sec-sub { font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 1.5rem; }
+
+  /* HERO */
+  .hero { background: var(--green-dark); color: white; padding: 4rem 2rem; text-align: center; }
+  .hero-badge {
+    display: inline-block; background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
+    padding: 4px 14px; font-size: 11px; margin-bottom: 1rem; color: white;
+  }
+  .hero h1 { font-size: 24px; font-weight: 700; line-height: 1.5; margin-bottom: 0.75rem; color: white; }
+  .hero p { font-size: 14px; line-height: 1.8; max-width: 520px; margin: 0 auto 1.5rem; color: rgba(255,255,255,0.85); }
+  .hero-btn {
+    display: inline-block; background: white; color: var(--green-dark);
+    border-radius: var(--radius-sm); padding: 10px 24px;
+    font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .hero-btn:hover { opacity: 0.9; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--green-mid); }
+  .stat-item { padding: 1.25rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.15); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-size: 24px; font-weight: 700; color: white; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 3px; }
+
+  /* VISION CARDS */
+  .vision-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .vision-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+  .v-label { font-size: 11px; color: var(--green); font-weight: 700; margin-bottom: 5px; }
+  .vision-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+
+  /* DECLARE BOX */
+  .declare-box { background: var(--green-bg); border-radius: var(--radius); padding: 1.25rem; border-left: 3px solid var(--green); }
+  .declare-box p { font-size: 13px; color: var(--green-dark); line-height: 1.9; font-style: italic; }
+
+  /* BG GRID */
+  .bg-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .bg-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; border-left: 3px solid var(--green); }
+  .bg-card h3 { font-size: 13px; font-weight: 700; color: var(--green-dark); margin-bottom: 5px; }
+  .bg-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+
+  /* ORG */
+  .type-block { margin-bottom: 1.75rem; }
+  .type-hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 0.6rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .type-badge { display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; }
+  .b-coop { background: var(--green-bg); color: var(--green-dark); }
+  .b-village { background: #E6F1FB; color: #042C53; }
+  .b-social { background: #EEEDFE; color: #26215C; }
+  .b-comm { background: #FAEEDA; color: #412402; }
+  .b-np { background: #FAECE7; color: #4A1B0C; }
+  .type-cnt { font-size: 11px; color: var(--text-light); }
+  .org-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+  .org-card {
+    background: white; border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 0.7rem 0.9rem; cursor: pointer; transition: border-color 0.15s;
+  }
+  .org-card:hover { border-color: var(--green); }
+  .org-card.open { border-color: var(--green); border-width: 1.5px; }
+  .org-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .org-name { font-size: 12px; font-weight: 700; line-height: 1.4; }
+  .org-rep { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+  .chev { font-size: 10px; color: var(--text-light); transition: transform 0.2s; flex-shrink: 0; margin-left: 4px; }
+  .org-card.open .chev { transform: rotate(180deg); color: var(--green); }
+  .org-detail { display: none; margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px solid var(--border); }
+  .org-card.open .org-detail { display: block; }
+  .d-label { font-size: 10px; color: var(--green); font-weight: 700; margin-bottom: 2px; }
+  .d-text { font-size: 11px; color: var(--text-sub); line-height: 1.5; }
+
+  /* BIZ */
+  .biz-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .biz-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+  .biz-num {
+    display: inline-flex; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--green); color: white; font-size: 12px; font-weight: 700;
+    align-items: center; justify-content: center; margin-bottom: 0.5rem;
+  }
+  .biz-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 0.4rem; }
+  .biz-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+  .biz-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 0.5rem; }
+  .biz-tag { background: var(--green-bg); color: var(--green-dark); font-size: 10px; border-radius: 3px; padding: 2px 7px; }
+
+  /* TASK */
+  .task-list { display: flex; flex-direction: column; gap: 8px; }
+  .task-item {
+    display: flex; align-items: center; gap: 12px;
+    background: white; border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 0.85rem 1rem;
+  }
+  .task-item.top { border-left: 3px solid var(--green); }
+  .task-rank {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--green-bg); color: var(--green-dark);
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .task-item.top .task-rank { background: var(--green); color: white; }
+  .task-txt { font-size: 13px; line-height: 1.5; }
+  .task-item.top .task-txt { font-weight: 700; color: var(--green-dark); }
+  .task-note { font-size: 11px; color: var(--text-light); margin-top: 8px; text-align: right; }
+
+  /* DECLARE */
+  .decl-header { background: var(--green-dark); border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem; text-align: center; }
+  .decl-header h3 { font-size: 15px; font-weight: 700; color: white; margin-bottom: 0.5rem; }
+  .decl-header p { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+  .decl-body { display: flex; flex-direction: column; gap: 1rem; }
+  .decl-para { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem; }
+  .decl-para-label { font-size: 10px; color: var(--green); font-weight: 700; margin-bottom: 6px; }
+  .decl-para p { font-size: 13px; color: var(--text-sub); line-height: 1.9; }
+  .decl-closing { background: var(--green-bg); border-radius: var(--radius); padding: 1.1rem 1.25rem; border-left: 3px solid var(--green); }
+  .decl-closing p { font-size: 13px; color: var(--green-dark); line-height: 1.9; font-weight: 700; }
+
+  /* TIMELINE */
+  .tl { position: relative; padding-left: 2rem; }
+  .tl::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--green-pale); }
+  .tl-item { position: relative; margin-bottom: 1.5rem; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute; left: -2rem; top: 4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--green); border: 3px solid var(--bg-alt);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tl-dot-inner { width: 6px; height: 6px; border-radius: 50%; background: white; }
+  .tl-date { font-size: 11px; color: var(--green-mid); font-weight: 700; margin-bottom: 4px; }
+  .tl-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 0.9rem 1.1rem; border-left: 3px solid var(--green); }
+  .tl-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+  .tl-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+  .tl-item.hi .tl-dot { background: var(--green-dark); }
+  .tl-item.hi .tl-card { border-left-color: var(--green-dark); background: var(--green-bg); }
+  .tl-item.hi h3 { color: var(--green-dark); }
+
+  /* JOIN */
+  .join-hero { background: var(--green-dark); border-radius: var(--radius); padding: 2rem; text-align: center; margin-bottom: 1.5rem; }
+  .join-hero h2 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 0.4rem; }
+  .join-hero p { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.7; }
+  .join-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  .join-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+  .join-card-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--green-bg); color: var(--green-dark);
+    font-size: 13px; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center; margin-bottom: 0.6rem;
+  }
+  .join-card h3 { font-size: 13px; font-weight: 700; margin-bottom: 0.5rem; color: var(--green-dark); }
+  .join-card p, .join-card li { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
+  .join-card ul { padding-left: 1rem; }
+  .join-card li { margin-bottom: 2px; }
+  .join-contact { background: var(--green-bg); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.5rem; }
+  .join-contact h3 { font-size: 13px; font-weight: 700; color: var(--green-dark); margin-bottom: 0.75rem; }
+  .contact-row { display: flex; gap: 0.5rem; margin-bottom: 5px; font-size: 12px; color: var(--text-sub); }
+  .contact-label { font-weight: 700; color: var(--green-dark); min-width: 50px; flex-shrink: 0; }
+  .join-apply-btn {
+    display: block; width: 100%; padding: 14px;
+    font-size: 15px; font-weight: 700; font-family: inherit;
+    border-radius: var(--radius); border: none;
+    background: var(--green); color: white; cursor: pointer;
+    text-align: center; text-decoration: none;
+    transition: background 0.15s;
+  }
+  .join-apply-btn:hover { background: var(--green-mid); }
+
+  /* NEWS */
+  .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .news-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+  .news-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .news-source { font-size: 10px; font-weight: 700; color: var(--green); }
+  .news-date { font-size: 10px; color: var(--text-light); }
+  .news-title { font-size: 13px; font-weight: 700; line-height: 1.5; margin-bottom: 6px; }
+  .news-desc { font-size: 11px; color: var(--text-sub); line-height: 1.6; }
+  .news-notice {
+    background: var(--bg-alt); border: 1px dashed #ccc;
+    border-radius: var(--radius-sm); padding: 1rem;
+    text-align: center; font-size: 12px; color: var(--text-light); margin-top: 1rem;
+  }
+
+  /* RESULT */
+  .result-toolbar { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .r-btn {
+    padding: 5px 12px; font-size: 12px; font-family: inherit;
+    border-radius: var(--radius-sm); border: 1px solid #ddd;
+    background: white; cursor: pointer; color: var(--text-sub);
+    transition: all 0.15s;
+  }
+  .r-btn.on { background: var(--green-bg); color: var(--green-dark); border-color: var(--green-pale); font-weight: 700; }
+  .result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .result-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
+  .r-year { font-size: 10px; color: var(--text-light); margin-bottom: 4px; }
+  .r-tag { display: inline-block; font-size: 10px; border-radius: 3px; padding: 2px 7px; margin-bottom: 6px; font-weight: 700; }
+  .r-tag.정책 { background: #E6F1FB; color: #042C53; }
+  .r-tag.네트워크 { background: var(--green-bg); color: var(--green-dark); }
+  .r-tag.공동사업 { background: #EEEDFE; color: #26215C; }
+  .r-tag.거버넌스 { background: #FAEEDA; color: #412402; }
+  .r-card-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; line-height: 1.4; }
+  .r-card-desc { font-size: 11px; color: var(--text-sub); line-height: 1.6; }
+  .add-btn {
+    display: block; width: 100%; padding: 10px; font-size: 13px; font-family: inherit;
+    border-radius: var(--radius-sm); border: 1px dashed #ccc;
+    background: none; cursor: pointer; color: var(--green);
+    text-align: center; margin-top: 1rem; transition: background 0.15s;
+  }
+  .add-btn:hover { background: var(--green-bg); }
+  .form-box {
+    background: white; border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem; margin-top: 1rem; display: none;
+  }
+  .form-box.open { display: block; }
+  .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px; }
+  .form-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-group label { font-size: 12px; color: var(--text-sub); font-weight: 500; }
+  .form-group input, .form-group select, .form-group textarea {
+    font-size: 13px; font-family: inherit; padding: 8px 10px;
+    border: 1px solid #ddd; border-radius: var(--radius-sm);
+    background: white; color: var(--text); width: 100%;
+    transition: border-color 0.15s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--green);
+  }
+  .form-group textarea { min-height: 80px; resize: vertical; }
+  .form-submit {
+    background: var(--green); color: white; border: none; font-family: inherit;
+    border-radius: var(--radius-sm); padding: 9px 20px;
+    font-size: 13px; font-weight: 700; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .form-submit:hover { background: var(--green-mid); }
+
+  /* ROADMAP */
+  .roadmap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 2rem; }
+  .roadmap-item { border-radius: var(--radius-sm); padding: 1rem; }
+  .roadmap-month { font-size: 10px; margin-bottom: 4px; }
+  .roadmap-title { font-size: 13px; font-weight: 700; }
+
+  /* FOOTER */
+  footer { background: var(--green-dark); color: rgba(255,255,255,0.75); padding: 2rem; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; gap: 1rem; }
+  .footer-logo { font-size: 14px; font-weight: 700; color: white; margin-bottom: 0.4rem; line-height: 1.5; }
+  .footer-desc { font-size: 12px; line-height: 1.6; max-width: 320px; }
+  .footer-links { display: flex; flex-direction: column; gap: 6px; text-align: right; flex-shrink: 0; }
+  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; cursor: pointer; }
+  .footer-links a:hover { color: white; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1rem; font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  /* LOADING */
+  .loading { text-align: center; padding: 2rem; color: var(--text-light); font-size: 13px; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.5rem; }
+    .nav-links { flex-wrap: wrap; justify-content: center; }
+    .hero { padding: 2.5rem 1rem; }
+    .hero h1 { font-size: 20px; }
+    .section { padding: 2rem 1rem; }
+    .vision-row, .biz-grid, .join-grid, .bg-grid { grid-template-columns: 1fr; }
+    .roadmap-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats { grid-template-columns: repeat(3, 1fr); }
+    .footer-top { flex-direction: column; }
+    .footer-links { text-align: left; }
+  }
 </style>
 </head>
 <body>
+
 <nav>
   <div class="nav-logo">부천<span>사회연대경제통합돌봄네트워크</span></div>
   <div class="nav-links">
@@ -186,7 +329,7 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
   </div>
 </nav>
 
-<!-- 홈 -->
+<!-- ══ 홈 ══ -->
 <div id="page-home" class="page active">
   <div class="hero">
     <div class="hero-badge">부천사회연대경제통합돌봄네트워크</div>
@@ -222,12 +365,12 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
   </div>
 </div>
 
-<!-- 소개 -->
+<!-- ══ 소개 ══ -->
 <div id="page-about" class="page">
   <div class="section">
     <div class="sec-title">네트워크 소개</div>
     <div class="divider"></div>
-    <div class="sec-sub">부천사회연대경제통합돌봄네트워크는 지역 기반의 통합돌봄 체계와 정책을 공동으로 개발하고 실행하기 위해 구성된 협력 네트워크입니다.</div>
+    <div class="sec-sub">부천사회연대경제통합돌봄네트워크는 지역 기반의 통합돌봄 체계와 정책을 공동으로 개발하고 실행하기 위해 구성된 협력 네트워크입니다. 돌봄은 더 이상 가족이나 개인의 힘만으로 감당할 수 없는 시대가 되었습니다. 지역사회가 함께 책임지는 새로운 구조가 필요합니다.</div>
     <div class="vision-row">
       <div class="vision-card"><div class="v-label">비전</div><p>사회연대경제 기반 통합돌봄으로 시민 모두가 지역에서 존엄하게 살아가는 부천을 만든다.</p></div>
       <div class="vision-card"><div class="v-label">미션</div><p>참여 기관들의 협력과 연대를 통해 의료·돌봄·복지 서비스를 연계하고 지역사회 돌봄 생태계를 구축한다.</p></div>
@@ -248,6 +391,7 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
   <div class="section">
     <div class="sec-title">2026 공동선언문</div>
     <div class="divider"></div>
+    <div class="sec-sub">2026년 3월 26일 통합돌봄플랫폼 포럼 라운드테이블 논의 결과를 모아 작성한 공동선언문입니다.</div>
     <div class="decl-header">
       <h3>부천사회연대경제통합돌봄네트워크 2026 공동선언문</h3>
       <p>우리는 오늘, 2026년 통합돌봄 제도의 시작이라는 역사적 전환점에서<br>지역사회가 스스로 돌봄을 책임지는 새로운 길을 함께 열고자 이 자리에 모였다.</p>
@@ -268,39 +412,36 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
       <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">2025년 7월 31일</div><div class="tl-card"><h3>부천사회연대경제 추진단 발족</h3><p>통합돌봄 네트워크 구축을 위한 추진단이 공식 출범했습니다.</p></div></div>
       <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">2025년 9월 11일</div><div class="tl-card"><h3>통합돌봄 시민공론장 개최</h3><p>지역 시민과 함께 통합돌봄의 방향을 논의하는 공론장이 개최되었습니다.</p></div></div>
       <div class="tl-item"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">2025년 11월</div><div class="tl-card"><h3>부천사회연대경제통합돌봄네트워크 전환</h3><p>추진단에서 정식 네트워크로 전환하였습니다.</p></div></div>
-      <div class="tl-item hi"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">2026년 3월 26일</div><div class="tl-card"><h3>통합돌봄플랫폼 포럼 및 공동선언문 채택</h3><p>부천시청 대강당에서 포럼을 개최하고 2026 공동선언문을 채택했습니다.</p></div></div>
-      <div class="tl-item hi"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">2026년 4월~9월 (예정)</div><div class="tl-card"><h3>자원조사·모델설계·시범사업 리빙랩</h3><p>지역 돌봄 자원조사 → 통합돌봄 모델 설계 → 시범사업 리빙랩 운영.</p></div></div>
+      <div class="tl-item hi"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">2026년 3월 26일</div><div class="tl-card"><h3>통합돌봄플랫폼 포럼 및 공동선언문 채택</h3><p>부천시청 대강당에서 포럼을 개최하고 라운드테이블 논의 결과를 바탕으로 2026 공동선언문을 채택했습니다.</p></div></div>
+      <div class="tl-item hi"><div class="tl-dot"><div class="tl-dot-inner"></div></div><div class="tl-date">2026년 4월~9월 (예정)</div><div class="tl-card"><h3>자원조사·모델설계·시범사업 리빙랩</h3><p>지역 돌봄 자원조사 및 간담회 → 통합돌봄 모델 설계 → 시범사업 리빙랩 운영.</p></div></div>
     </div>
   </div>
 </div>
 
-<!-- 참여기관 -->
+<!-- ══ 참여기관 ══ -->
 <div id="page-orgs" class="page">
   <div class="section">
     <div class="sec-title">참여 기관 소개</div>
     <div class="divider"></div>
-    <div class="sec-sub">사회연대경제 조직이 함께합니다. 기관명을 클릭하면 상세 정보를 볼 수 있습니다.</div>
-    <div id="orgs-loading" class="loading">참여기관 정보를 불러오는 중...</div>
-    <div id="orgs-content" style="display:none;">
-      <div class="type-block"><div class="type-hdr"><span class="type-badge b-coop">협동조합</span><span class="type-cnt" id="cnt-coop"></span></div><div class="org-grid" id="g-coop"></div></div>
-      <div class="type-block"><div class="type-hdr"><span class="type-badge b-village">마을기업</span><span class="type-cnt" id="cnt-village"></span></div><div class="org-grid" id="g-village"></div></div>
-      <div class="type-block"><div class="type-hdr"><span class="type-badge b-social">사회적기업</span><span class="type-cnt" id="cnt-social"></span></div><div class="org-grid" id="g-social"></div></div>
-      <div class="type-block"><div class="type-hdr"><span class="type-badge b-comm">마을공동체</span><span class="type-cnt" id="cnt-comm"></span></div><div class="org-grid" id="g-comm"></div></div>
-      <div class="type-block"><div class="type-hdr"><span class="type-badge b-np">비영리조직</span><span class="type-cnt" id="cnt-np"></span></div><div class="org-grid" id="g-np"></div></div>
-    </div>
+    <div class="sec-sub">23개 사회연대경제 조직이 함께합니다. 기관명을 클릭하면 상세 정보를 볼 수 있습니다.</div>
+    <div class="type-block"><div class="type-hdr"><span class="type-badge b-coop">협동조합</span><span class="type-cnt">12개</span></div><div class="org-grid" id="g-coop"></div></div>
+    <div class="type-block"><div class="type-hdr"><span class="type-badge b-village">마을기업</span><span class="type-cnt">1개</span></div><div class="org-grid" id="g-village"></div></div>
+    <div class="type-block"><div class="type-hdr"><span class="type-badge b-social">사회적기업</span><span class="type-cnt">5개</span></div><div class="org-grid" id="g-social"></div></div>
+    <div class="type-block"><div class="type-hdr"><span class="type-badge b-comm">마을공동체</span><span class="type-cnt">3개</span></div><div class="org-grid" id="g-comm"></div></div>
+    <div class="type-block"><div class="type-hdr"><span class="type-badge b-np">비영리조직</span><span class="type-cnt">2개</span></div><div class="org-grid" id="g-np"></div></div>
   </div>
 </div>
 
-<!-- 사업내용 -->
+<!-- ══ 사업내용 ══ -->
 <div id="page-biz" class="page">
   <div class="section">
     <div class="sec-title">사업 내용</div>
     <div class="divider"></div>
     <div class="biz-grid">
-      <div class="biz-card"><div class="biz-num">1</div><h3>정책 개발</h3><p>돌봄통합지원법(2024.3.6 제정) 시행을 위한 정책 연구와 현장 의견 수렴. 연합회 정책대응위원회 참여, 2026 지방선거 정책 제안을 통해 현장의 목소리를 제도에 반영합니다.</p><div class="biz-tags"><span class="biz-tag">정책 연구</span><span class="biz-tag">제도화 추진</span><span class="biz-tag">정책 제안</span></div></div>
-      <div class="biz-card"><div class="biz-num">2</div><h3>네트워크</h3><p>부천 지역 참여 기관 간 정기 모임과 정보 공유로 협력 기반을 강화합니다. 통합돌봄플랫폼 포럼, 시민공론장, 네트워크 총회를 운영하며 부천형 통합돌봄 생태계를 함께 구축합니다.</p><div class="biz-tags"><span class="biz-tag">부천 네트워크</span><span class="biz-tag">정기 포럼</span><span class="biz-tag">시민공론장</span></div></div>
-      <div class="biz-card"><div class="biz-num">3</div><h3>공동사업 개발 및 추진</h3><p>돌봄·의료·복지·주거·문화 등 각 영역의 조직들이 연대하여 지역의 공동 사회 문제를 함께 발굴하고, 협력으로 설계하고 추진합니다.</p><div class="biz-tags"><span class="biz-tag">공동사업 발굴</span><span class="biz-tag">협력 설계</span><span class="biz-tag">통합 추진</span></div></div>
-      <div class="biz-card"><div class="biz-num">4</div><h3>거버넌스</h3><p>부천시·경기도·공공기관과의 민관 협력 체계를 구축합니다. 포럼 → 자원조사·지역간담회 → 모델 설계 → 시범사업 리빙랩 순으로 부천형 통합돌봄 거버넌스 모델을 완성해 나갑니다.</p><div class="biz-tags"><span class="biz-tag">민관 협력</span><span class="biz-tag">리빙랩</span><span class="biz-tag">협치 모델</span></div></div>
+      <div class="biz-card"><div class="biz-num">1</div><h3>정책 개발</h3><p>돌봄통합지원법(2024.3.6 제정) 시행을 위한 정책 연구와 현장 의견 수렴. 연합회 정책대응위원회 참여, 2026 지방선거 정책 제안, 경기도 사회적경제 활성화 사업 참여를 통해 현장의 목소리를 제도에 반영합니다.</p><div class="biz-tags"><span class="biz-tag">정책 연구</span><span class="biz-tag">제도화 추진</span><span class="biz-tag">정책 제안</span><span class="biz-tag">입법 대응</span></div></div>
+      <div class="biz-card"><div class="biz-num">2</div><h3>네트워크</h3><p>부천 지역 참여 기관 간 정기 모임과 정보 공유로 협력 기반을 강화합니다. 통합돌봄플랫폼 포럼, 시민공론장, 네트워크 총회를 운영하며 부천형 통합돌봄 생태계를 함께 구축합니다.</p><div class="biz-tags"><span class="biz-tag">부천 네트워크</span><span class="biz-tag">정기 포럼</span><span class="biz-tag">시민공론장</span><span class="biz-tag">기관 간 연계</span></div></div>
+      <div class="biz-card"><div class="biz-num">3</div><h3>공동사업 개발 및 추진</h3><p>돌봄·의료·복지·주거·문화 등 각 영역의 조직들이 연대하여 지역의 공동 사회 문제를 함께 발굴하고, 어느 한 조직이 단독으로 해결하기 어려운 과제를 협력으로 설계하고 추진합니다.</p><div class="biz-tags"><span class="biz-tag">공동사업 발굴</span><span class="biz-tag">협력 설계</span><span class="biz-tag">통합 추진</span><span class="biz-tag">현장 실행</span></div></div>
+      <div class="biz-card"><div class="biz-num">4</div><h3>거버넌스</h3><p>부천시·경기도·공공기관과의 민관 협력 체계를 구축합니다. 포럼 → 자원조사·지역간담회 → 모델 설계 → 시범사업 리빙랩 순으로 부천형 통합돌봄 거버넌스 모델을 완성해 나갑니다.</p><div class="biz-tags"><span class="biz-tag">민관 협력</span><span class="biz-tag">리빙랩</span><span class="biz-tag">협치 모델</span><span class="biz-tag">공공 연대</span></div></div>
     </div>
   </div>
   <div class="section section-alt">
@@ -323,10 +464,10 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
     <div class="sec-title">2026년 추진 로드맵</div>
     <div class="divider"></div>
     <div class="roadmap-grid">
-      <div class="roadmap-item" style="background:#1D9E75;"><div style="font-size:10px;color:rgba(255,255,255,0.75);margin-bottom:4px;">2026년 3월</div><div style="font-size:13px;font-weight:700;color:white;">포럼 개최·의견 수렴</div></div>
-      <div class="roadmap-item" style="background:#5DCAA5;"><div style="font-size:10px;color:rgba(255,255,255,0.75);margin-bottom:4px;">2026년 4~5월</div><div style="font-size:13px;font-weight:700;color:white;">자원조사·지역간담회</div></div>
-      <div class="roadmap-item" style="background:#9FE1CB;"><div style="font-size:10px;color:#085041;margin-bottom:4px;">2026년 6월</div><div style="font-size:13px;font-weight:700;color:#085041;">모델 설계</div></div>
-      <div class="roadmap-item" style="background:#E1F5EE;border:1px solid #9FE1CB;"><div style="font-size:10px;color:#085041;margin-bottom:4px;">2026년 7~9월</div><div style="font-size:13px;font-weight:700;color:#085041;">시범사업 리빙랩</div></div>
+      <div class="roadmap-item" style="background:#1D9E75;"><div class="roadmap-month" style="color:rgba(255,255,255,0.75);">2026년 3월</div><div class="roadmap-title" style="color:white;">포럼 개최·의견 수렴</div></div>
+      <div class="roadmap-item" style="background:#5DCAA5;"><div class="roadmap-month" style="color:rgba(255,255,255,0.75);">2026년 4~5월</div><div class="roadmap-title" style="color:white;">자원조사·지역간담회</div></div>
+      <div class="roadmap-item" style="background:#9FE1CB;"><div class="roadmap-month" style="color:#085041;">2026년 6월</div><div class="roadmap-title" style="color:#085041;">모델 설계</div></div>
+      <div class="roadmap-item" style="background:#E1F5EE;border:1px solid #9FE1CB;"><div class="roadmap-month" style="color:#085041;">2026년 7~9월</div><div class="roadmap-title" style="color:#085041;">시범사업 리빙랩</div></div>
     </div>
     <div style="margin-top:2rem;">
       <div class="sec-title" style="font-size:16px;">사업 결과</div>
@@ -338,8 +479,7 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
         <button class="r-btn" onclick="filterResult(this,'공동사업')">공동사업</button>
         <button class="r-btn" onclick="filterResult(this,'거버넌스')">거버넌스</button>
       </div>
-      <div id="results-loading" class="loading">사업결과를 불러오는 중...</div>
-      <div class="result-grid" id="result-grid" style="display:none;"></div>
+      <div class="result-grid" id="result-grid"></div>
       <button class="add-btn" onclick="toggleForm()">+ 사업 결과 등록하기</button>
       <div class="form-box" id="form-box">
         <div style="font-size:14px;font-weight:700;margin-bottom:1rem;">사업 결과 등록</div>
@@ -358,7 +498,7 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
   </div>
 </div>
 
-<!-- 가입안내 -->
+<!-- ══ 가입안내 ══ -->
 <div id="page-join" class="page">
   <div class="section">
     <div class="sec-title">가입 안내</div>
@@ -383,15 +523,16 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
   </div>
 </div>
 
-<!-- 언론보도 -->
+<!-- ══ 언론보도 ══ -->
 <div id="page-news" class="page">
   <div class="section">
     <div class="sec-title">언론 보도</div>
     <div class="divider"></div>
     <div class="sec-sub">부천사회연대경제통합돌봄네트워크 관련 언론 보도 자료입니다.</div>
-    <div id="news-loading" class="loading">언론보도를 불러오는 중...</div>
-    <div class="news-grid" id="news-grid" style="display:none;"></div>
-    <div class="news-notice">Notion 언론보도 DB에 항목을 추가하면 이 공간에 자동으로 표시됩니다.</div>
+    <div class="news-grid" id="news-grid">
+      <div class="loading">보도 자료를 불러오는 중...</div>
+    </div>
+    <div class="news-notice">실제 언론 보도 자료를 Notion 데이터베이스에 등록하면 이 공간에 자동으로 표시됩니다.</div>
   </div>
 </div>
 
@@ -400,7 +541,10 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
     <div>
       <div class="footer-logo">부천사회연대경제통합돌봄네트워크</div>
       <div class="footer-desc">협동과 연대로 돌봄 사회 가치를 실현하는 부천의 사회연대경제 통합돌봄 네트워크입니다.</div>
-      <div style="margin-top:0.75rem;font-size:12px;line-height:1.8;"><div>이메일: bccarenet@gmail.com</div><div>전화: 010-5016-7856</div></div>
+      <div style="margin-top:0.75rem;font-size:12px;line-height:1.8;">
+        <div>이메일: bccarenet@gmail.com</div>
+        <div>전화: 010-5016-7856</div>
+      </div>
     </div>
     <div class="footer-links">
       <a onclick="showPage('home')">홈</a>
@@ -415,79 +559,186 @@ footer{background:var(--green-dark);color:rgba(255,255,255,0.75);padding:2rem;}
 </footer>
 
 <script>
-// 언론보도 불러오기
-async function loadNews() {
-  try {
-    const res = await fetch('/api/notion?type=news');
-    const data = await res.json();
+const orgs = {
+  coop: [
+    {name:"경기두레생협",rep:"경인선",biz:"친환경 먹거리 공급, 조합원 교육문화, 지역 나눔활동",desc:"지역 주민과 함께 친환경 먹거리를 공급하고 교육·문화·나눔 활동으로 건강한 생협 공동체를 만들어갑니다."},
+    {name:"더불어우리 사회적협동조합",rep:"이주희",biz:"발달장애인 주간활동서비스, 주말나들이 돌봄",desc:"발달장애인이 지역사회에서 자립적으로 생활할 수 있도록 주간활동서비스와 주말 돌봄을 운영합니다."},
+    {name:"부천YWCA돌봄과살림협동조합",rep:"임행심",biz:"가사관리사 교육 및 파견",desc:"가사관리사 전문 교육과 파견을 통해 돌봄 노동자 역량을 강화하고 가정 내 돌봄 서비스의 질을 높입니다."},
+    {name:"부천이종협동조합연합회",rep:"최승주",biz:"협동조합 연대사업 및 홍보",desc:"부천 지역 다양한 협동조합 간 연대와 협력을 촉진하고 협동조합 운동의 가치를 홍보합니다."},
+    {name:"부천의료복지사회적협동조합",rep:"이선주",biz:"의료·돌봄 통합서비스 (재가의료, 방문간호, 건강돌봄리더 양성)",desc:"조합원과 지역 주민이 함께 만드는 의료협동조합. 재가의료·방문간호·건강돌봄리더 양성 등 통합 의료돌봄 서비스를 제공합니다."},
+    {name:"사회적협동조합 공존",rep:"임성현",biz:"성인발달장애인 주간활동서비스",desc:"성인발달장애인의 사회참여와 자립을 지원하는 주간활동서비스를 운영합니다."},
+    {name:"사회적협동조합 섬나돌",rep:"최재혁",biz:"아동돌봄, 노인돌봄 (요양원, 방문요양)",desc:"아동부터 노인까지 생애주기를 아우르는 돌봄 서비스. 요양원 운영과 방문요양으로 지역 어르신을 지원합니다."},
+    {name:"사회적협동조합플러스부천",rep:"박동욱",biz:"자활근로사업단 운영, 통합돌봄, 자활자립 지원",desc:"저소득층의 자립을 돕는 자활사업단을 운영하고 통합돌봄 서비스와 연계하여 취약계층 자립을 지원합니다."},
+    {name:"스마일어게인사협",rep:"임진성",biz:"이주배경 청소년 교육 및 이주민 가정 지원",desc:"이주배경 청소년 교육지원과 이주민 가정 통합 지원으로 다문화 공동체를 만들어갑니다."},
+    {name:"위인협동조합",rep:"황인매",biz:"장애인 참여형 연구, 접근성 평가, 재가복지 서비스 개발",desc:"장애인이 직접 참여하는 연구·접근성 평가를 수행하고 재가복지 서비스를 개발합니다."},
+    {name:"행복한동행발전소 사회적협동조합",rep:"박양심",biz:"성인발달장애인 주간활동서비스, 방과후활동서비스",desc:"성인발달장애인 주간활동서비스와 청소년 발달장애인 방과후 활동서비스를 운영합니다."},
+    {name:"희망나눔사회적협동조합",rep:"김인자",biz:"산모신생아, 가사, 주간보호, 방문요양, 일상돌봄",desc:"산모·신생아부터 방문요양까지 생애 전 주기 일상돌봄 서비스를 제공하는 통합돌봄 협동조합입니다."},
+  ],
+  village: [{name:"산제로협동조합 (마을기업)",rep:"이하경",biz:"제로웨이스트샵, 플라스틱방앗간, 환경캠페인, 케이터링",desc:"제로웨이스트 생활문화 확산과 환경 캠페인·플라스틱 업사이클링·케이터링 사업을 운영하는 마을기업입니다."}],
+  social: [
+    {name:"(주)나눔과돌봄",rep:"김경옥",biz:"방문요양, 방문목욕, 방문간호, 가사간병, 일상돌봄",desc:"어르신과 장애인을 위한 방문요양·방문목욕·방문간호·가사간병 등 재가돌봄 서비스를 전문적으로 제공합니다."},
+    {name:"(주)에이엠피",rep:"임재현",biz:"문화예술 교육, 영상 콘텐츠 제작, 축제 기획",desc:"문화예술 교육·영상 콘텐츠 제작·지역 축제 기획으로 지역 문화를 풍성하게 만드는 사회적기업입니다."},
+    {name:"(주)우령각시매직케어",rep:"김은미",biz:"청소용역 (학교, 병원 등 건물청소)",desc:"학교·병원 등 공공시설 청소 용역을 통해 깨끗한 환경을 만들고 취약계층 일자리를 창출합니다."},
+    {name:"(주)튼튼한거북이",rep:"최진석",biz:"찾아가는 노인 단체운동, 노인운동지도자 양성",desc:"어르신이 계신 곳으로 찾아가는 단체 체조·운동 프로그램 운영과 노인운동지도자를 양성합니다."},
+    {name:"(주)프랜더",rep:"유재창",biz:"AI·VR 교육, 홈페이지·E카탈로그 제작",desc:"AI·VR 디지털 교육과 홈페이지·전자카탈로그 제작으로 지역 조직의 디지털 전환을 지원합니다."},
+  ],
+  comm: [
+    {name:"시루작은도서관",rep:"오산",biz:"작은도서관 운영, 마을공동체·평생학습 지원",desc:"작은도서관을 거점으로 마을 주민의 독서문화·평생학습을 지원하고 공동체 활동을 이어갑니다."},
+    {name:"약대동통합돌봄협의회",rep:"정성희",biz:"돌봄, 주거환경개선, 무연고장례, 교육복지",desc:"약대동 지역 주민의 돌봄·주거환경개선·무연고장례·교육복지를 지원하는 마을공동체 협의체입니다."},
+    {name:"역곡은마을 (돌작의 마을돌봄팀)",rep:"이선희",biz:"마을공동체 사업, 마을돌봄",desc:"역곡 은마을을 기반으로 주민 주도 마을공동체 사업과 이웃 돌봄 활동을 펼치는 마을돌봄팀입니다."},
+  ],
+  np: [
+    {name:"사단법인경기장애인부모연대 부천지회",rep:"허혜영",biz:"발달장애인 낮활동, 예술노동제작소, 자립지원 시범사업",desc:"발달장애인 부모들이 함께 만든 단체. 낮활동 지원·예술노동제작소·자립지원 시범사업으로 장애인 권리를 실현합니다."},
+    {name:"부천시의료원설립 시민공공행동",rep:"조규석",biz:"부천시의료원 설립 추진, 공공의료 의제 발굴·캠페인",desc:"공공의료 확충을 위해 부천시의료원 설립을 추진하고 지역 공공의료 의제를 발굴·캠페인하는 시민단체입니다."},
+  ]
+};
 
-    const container = document.getElementById('news-grid');
-    container.innerHTML = '';
+function renderOrgs(gid, items) {
+  const g = document.getElementById(gid);
+  if (!g) return;
+  items.forEach(o => {
+    const c = document.createElement('div');
+    c.className = 'org-card';
+    c.innerHTML = `<div class="org-top"><div><div class="org-name">${o.name}</div><div class="org-rep">대표 ${o.rep}</div></div><span class="chev">▼</span></div><div class="org-detail"><div class="d-label">주요 사업</div><div class="d-text" style="margin-bottom:5px">${o.biz}</div><div class="d-label">기관 소개</div><div class="d-text">${o.desc}</div></div>`;
+    c.addEventListener('click', () => c.classList.toggle('open'));
+    g.appendChild(c);
+  });
+}
+renderOrgs('g-coop', orgs.coop);
+renderOrgs('g-village', orgs.village);
+renderOrgs('g-social', orgs.social);
+renderOrgs('g-comm', orgs.comm);
+renderOrgs('g-np', orgs.np);
 
-    data.results.forEach(item => {
-      const p = item.properties;
+let resultsData = [];
+let curFilter = '전체';
 
-      const title = p.제목?.title?.[0]?.plain_text || '';
-      const date = p.날짜?.date?.start || '';
-      const source = p.출처?.rich_text?.[0]?.plain_text || '';
-      const summary = p.요약?.rich_text?.[0]?.plain_text || '';
-
-      container.innerHTML += `
-        <div class="news-card">
-          <div class="news-meta">
-            <span class="news-source">${source}</span>
-            <span class="news-date">${date}</span>
-          </div>
-          <div class="news-title">${title}</div>
-          <div class="news-desc">${summary}</div>
-        </div>
-      `;
-    });
-
-  } catch (err) {
-    console.error('뉴스 불러오기 실패:', err);
-  }
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
-// 사업결과 불러오기
+function getPlainText(prop) {
+  if (!prop) return '';
+  if (prop.title) return prop.title.map(v => v.plain_text).join('');
+  if (prop.rich_text) return prop.rich_text.map(v => v.plain_text).join('');
+  return '';
+}
+
+function renderResults() {
+  const g = document.getElementById('result-grid');
+  if (!g) return;
+  g.innerHTML = '';
+
+  const list = curFilter === '전체'
+    ? resultsData
+    : resultsData.filter(r => r.tag === curFilter);
+
+  if (!list.length) {
+    g.innerHTML = '<div class="news-notice">등록된 사업 결과가 없습니다.</div>';
+    return;
+  }
+
+  list.forEach(r => {
+    const c = document.createElement('div');
+    c.className = 'result-card';
+    const yearLabel = r.year ? `${escapeHtml(r.year)}년` : '';
+    const tagClass = escapeHtml(r.tag || '');
+    c.innerHTML = `<div class="r-year">${yearLabel}</div><div class="r-tag ${tagClass}">${escapeHtml(r.tag)}</div><div class="r-card-title">${escapeHtml(r.title)}</div><div class="r-card-desc">${escapeHtml(r.desc)}</div>`;
+    g.appendChild(c);
+  });
+}
+
 async function loadResults() {
+  const g = document.getElementById('result-grid');
+  if (!g) return;
+
   try {
+    g.innerHTML = '<div class="loading">사업 결과를 불러오는 중...</div>';
     const res = await fetch('/api/notion?type=results');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
     const data = await res.json();
+    const rows = Array.isArray(data.results) ? data.results : [];
 
-    const container = document.getElementById('result-grid');
-    container.innerHTML = '';
-
-    data.results.forEach(item => {
-      const p = item.properties;
-
-      const title = p.사업명?.title?.[0]?.plain_text || '';
-      const type = p.분류?.select?.name || '';
-      const year = p.연도?.number || '';
-      const desc = p.내용?.rich_text?.[0]?.plain_text || '';
-
-      container.innerHTML += `
-        <div class="result-card">
-          <div class="r-year">${year}</div>
-          <div class="r-tag">${type}</div>
-          <div class="r-card-title">${title}</div>
-          <div class="r-card-desc">${desc}</div>
-        </div>
-      `;
+    resultsData = rows.map(item => {
+      const p = item.properties || {};
+      return {
+        year: p.연도?.number ?? '',
+        tag: p.분류?.select?.name || '',
+        title: getPlainText(p.사업명),
+        desc: getPlainText(p.내용),
+      };
     });
 
+    renderResults();
   } catch (err) {
     console.error('사업결과 불러오기 실패:', err);
+    g.innerHTML = '<div class="news-notice">사업 결과를 불러오지 못했습니다. Vercel 환경변수와 Notion 연동을 확인해 주세요.</div>';
   }
 }
 
-// 실행
-loadNews();
-loadResults();
-</script>
+function filterResult(btn, tag) {
+  document.querySelectorAll('.r-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  curFilter = tag;
+  renderResults();
+}
 
-// 페이지 로드 시 데이터 가져오기
-loadOrgs();
+function toggleForm() {
+  document.getElementById('form-box').classList.toggle('open');
+}
+
+async function loadNews() {
+  const g = document.getElementById('news-grid');
+  if (!g) return;
+
+  try {
+    g.innerHTML = '<div class="loading">보도 자료를 불러오는 중...</div>';
+    const res = await fetch('/api/notion?type=news');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+    const rows = Array.isArray(data.results) ? data.results : [];
+
+    if (!rows.length) {
+      g.innerHTML = '<div class="news-notice">등록된 언론보도가 없습니다.</div>';
+      return;
+    }
+
+    g.innerHTML = '';
+    rows.forEach(item => {
+      const p = item.properties || {};
+      const title = getPlainText(p.제목);
+      const date = p.날짜?.date?.start || '';
+      const source = getPlainText(p.출처);
+      const desc = getPlainText(p.요약);
+      const link = p.링크?.url || '';
+
+      const c = document.createElement('div');
+      c.className = 'news-card';
+      c.innerHTML = `<div class="news-meta"><span class="news-source">${escapeHtml(source)}</span><span class="news-date">${escapeHtml(date)}</span></div><div class="news-title">${link ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">${escapeHtml(title)}</a>` : escapeHtml(title)}</div><div class="news-desc">${escapeHtml(desc)}</div>`;
+      g.appendChild(c);
+    });
+  } catch (err) {
+    console.error('뉴스 불러오기 실패:', err);
+    g.innerHTML = '<div class="news-notice">언론보도를 불러오지 못했습니다. Vercel 환경변수와 Notion 연동을 확인해 주세요.</div>';
+  }
+}
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const tabs = {home:0, about:1, orgs:2, biz:3, join:4, news:5};
+  document.querySelectorAll('.nav-links button')[tabs[id]].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
 loadResults();
 loadNews();
 </script>
