@@ -57,39 +57,97 @@
   .sec-sub { font-size: 15px; color: var(--text-sub); line-height: 1.8; margin-bottom: 1.5rem; }
 
   /* HERO */
-  .hero { background: var(--green-dark); color: white; padding: 4rem 2rem; text-align: center; }
+  .hero {
+    position: relative; min-height: 560px; color: white; overflow: hidden;
+    display: flex; align-items: flex-end; padding: 5rem 2rem 3rem;
+    background:
+      linear-gradient(90deg, rgba(5,42,35,0.92) 0%, rgba(5,42,35,0.78) 40%, rgba(5,42,35,0.2) 100%),
+      linear-gradient(0deg, rgba(5,42,35,0.75), rgba(5,42,35,0.05) 45%),
+      url('assets/hero-community-care.jpg') center / cover no-repeat;
+  }
+  .hero-content { width: min(980px, 100%); margin: 0 auto; }
   .hero-badge {
-    display: block; background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.3); border-radius: 20px;
-    padding: 8px 18px; font-size: 32px; font-weight: 700; line-height: 1.4;
-    margin: 0 auto 1rem; color: white; width: fit-content;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.34);
+    border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 700;
+    line-height: 1.4; margin-bottom: 1.1rem; color: white; backdrop-filter: blur(8px);
   }
-  .hero h1 { font-size: 32px; font-weight: 700; line-height: 1.5; margin-bottom: 0.75rem; color: white; }
-  .hero p { font-size: 14px; line-height: 1.8; max-width: 520px; margin: 0 auto 1.5rem; color: rgba(255,255,255,0.85); }
+  .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green-light); }
+  .hero h1 { font-size: clamp(34px, 5vw, 58px); font-weight: 700; line-height: 1.22; margin-bottom: 1rem; color: white; max-width: 720px; }
+  .hero p { font-size: 17px; line-height: 1.85; max-width: 640px; margin: 0 0 1.7rem; color: rgba(255,255,255,0.88); }
+  .hero-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .hero-btn {
-    display: inline-block; background: white; color: var(--green-dark);
-    border-radius: var(--radius-sm); padding: 10px 24px;
+    display: inline-flex; align-items: center; justify-content: center; background: white; color: var(--green-dark);
+    border-radius: var(--radius-sm); padding: 12px 22px;
     font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none;
-    transition: opacity 0.15s;
+    transition: transform 0.15s, opacity 0.15s;
   }
-  .hero-btn:hover { opacity: 0.9; }
+  .hero-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+  .hero-btn.secondary { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.34); }
 
   /* STATS */
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--green-mid); }
-  .stat-item { padding: 1.25rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.15); }
-  .stat-item:last-child { border-right: none; }
-  .stat-num { font-size: 24px; font-weight: 700; color: white; }
-  .stat-label { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 3px; }
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    width: min(980px, calc(100% - 4rem)); margin: -2.2rem auto 0;
+    position: relative; z-index: 2; overflow: hidden; border-radius: var(--radius);
+    background: rgba(8,80,65,0.2); box-shadow: 0 16px 42px rgba(8,80,65,0.16);
+  }
+  .stat-item { padding: 1.3rem 1.5rem; background: white; }
+  .stat-num { font-size: 30px; font-weight: 700; color: var(--green-dark); letter-spacing: 0; }
+  .stat-label { font-size: 12px; color: var(--text-sub); margin-top: 4px; font-weight: 500; }
 
   /* VISION CARDS */
-  .vision-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.25rem; }
-  .vision-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; }
-  .v-label { font-size: 11px; color: var(--green); font-weight: 700; margin-bottom: 5px; }
-  .vision-card p { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
+  .vision-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem; }
+  .vision-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; box-shadow: 0 10px 28px rgba(0,0,0,0.04); }
+  .v-label { font-size: 12px; color: var(--green); font-weight: 700; margin-bottom: 8px; }
+  .vision-card p { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
 
   /* DECLARE BOX */
-  .declare-box { background: var(--green-bg); border-radius: var(--radius); padding: 1.25rem; border-left: 3px solid var(--green); }
-  .declare-box p { font-size: 13px; color: var(--green-dark); line-height: 1.9; font-style: italic; }
+  .declare-box { background: var(--green-bg); border-radius: var(--radius); padding: 1.35rem 1.5rem; border-left: 4px solid var(--green); }
+  .declare-box p { font-size: 15px; color: var(--green-dark); line-height: 1.9; font-style: italic; }
+
+  /* HOME CONTENT */
+  #page-home .section { padding: 4.2rem 2rem; }
+  #page-home .section:not(.section-alt) { max-width: 1040px; margin: 0 auto; }
+  #page-home .section-alt {
+    padding-left: max(2rem, calc((100% - 1040px) / 2));
+    padding-right: max(2rem, calc((100% - 1040px) / 2));
+    background: linear-gradient(180deg, #f7f9f8 0%, #edf7f3 100%);
+  }
+  #page-home .sec-title { font-size: 28px; letter-spacing: 0; color: var(--green-dark); }
+  #page-home .divider { width: 44px; height: 3px; border-radius: 99px; margin: 0.75rem 0 1.35rem; }
+  #page-home .sec-sub {
+    max-width: 760px; font-size: 17px; color: #3f4945; line-height: 1.95;
+    margin-bottom: 2rem;
+  }
+  .home-intro-block {
+    display: grid; grid-template-columns: 260px 1fr; gap: 2rem; align-items: start;
+    padding: 2rem; border-radius: var(--radius); background: linear-gradient(135deg, #ffffff 0%, #f2fbf7 100%);
+    border: 1px solid rgba(8,80,65,0.12); margin-bottom: 1.4rem;
+  }
+  .home-intro-block .sec-sub { margin-bottom: 0; }
+  .home-intro-heading .divider { margin-bottom: 0; }
+  #page-home .vision-row { gap: 14px; margin-bottom: 1.4rem; }
+  #page-home .vision-card {
+    min-height: 148px; border-color: rgba(8,80,65,0.12);
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  }
+  #page-home .vision-card:hover { transform: translateY(-2px); border-color: var(--green-pale); box-shadow: 0 16px 34px rgba(8,80,65,0.09); }
+  #page-home .v-label {
+    display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--green-dark);
+  }
+  #page-home .v-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  #page-home .declare-box {
+    background: #f4fbf8; border: 1px solid rgba(8,80,65,0.14); border-left: 4px solid var(--green);
+  }
+  #page-home .biz-grid { gap: 14px; }
+  #page-home .biz-card {
+    position: relative; overflow: hidden; padding: 1.35rem; border-color: rgba(8,80,65,0.12);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.035);
+  }
+  #page-home .biz-card::after {
+    content: ''; position: absolute; inset: 0 0 auto; height: 4px; background: var(--green);
+  }
 
   /* BG GRID */
   .bg-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -289,6 +347,144 @@
   .roadmap-month { font-size: 10px; margin-bottom: 4px; }
   .roadmap-title { font-size: 13px; font-weight: 700; }
 
+  /* INNER PAGES */
+  .page:not(#page-home) { background: linear-gradient(180deg, #fbfdfc 0%, #ffffff 220px); }
+  .page:not(#page-home) .section {
+    width: min(1080px, 100%); margin: 0 auto; padding: 4rem 2rem;
+  }
+  .page:not(#page-home) .section:first-child {
+    padding-top: 4.8rem;
+  }
+  .page:not(#page-home) .section-alt {
+    width: 100%; max-width: none; margin: 0;
+    padding-left: max(2rem, calc((100% - 1080px) / 2));
+    padding-right: max(2rem, calc((100% - 1080px) / 2));
+    background: linear-gradient(180deg, #f7faf9 0%, #edf7f3 100%);
+    border-top: 1px solid rgba(8,80,65,0.07);
+    border-bottom: 1px solid rgba(8,80,65,0.07);
+  }
+  .page:not(#page-home) .sec-title {
+    font-size: 30px; color: var(--green-dark); letter-spacing: 0; line-height: 1.35;
+  }
+  .page:not(#page-home) .divider {
+    width: 48px; height: 3px; border-radius: 99px; margin: 0.8rem 0 1.4rem;
+  }
+  .page:not(#page-home) .sec-sub {
+    max-width: 780px; font-size: 17px; line-height: 1.9; color: #3f4945; margin-bottom: 2rem;
+  }
+  .page:not(#page-home) .section:first-child > .sec-sub {
+    padding: 2rem; border-radius: var(--radius); color: rgba(255,255,255,0.88);
+    background:
+      linear-gradient(90deg, rgba(5,42,35,0.96), rgba(15,110,86,0.84)),
+      url('assets/hero-community-care.jpg') center / cover no-repeat;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 16px 36px rgba(8,80,65,0.16);
+  }
+  .page:not(#page-home) .section:first-child > .sec-sub::before {
+    content: ''; display: block; width: 34px; height: 3px; border-radius: 99px;
+    background: var(--green-light); margin-bottom: 1rem;
+  }
+  .page-intro-panel {
+    min-height: 120px; margin-bottom: 1.5rem; border-radius: var(--radius);
+    padding: 1.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    background:
+      linear-gradient(90deg, rgba(5,42,35,0.96), rgba(15,110,86,0.84)),
+      url('assets/hero-community-care.jpg') center / cover no-repeat;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 16px 36px rgba(8,80,65,0.16);
+  }
+  .page-intro-item {
+    display: flex; align-items: center; gap: 8px; min-height: 70px;
+    padding: 0.9rem; border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    color: white; font-size: 14px; font-weight: 700; line-height: 1.45;
+    backdrop-filter: blur(6px);
+  }
+  .page-intro-item::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-light); flex-shrink: 0;
+  }
+  .bg-card, .biz-card, .join-card, .news-card, .result-card, .tl-card, .decl-para, .org-card {
+    border-color: rgba(8,80,65,0.12);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.035);
+  }
+  .bg-card {
+    border-left: 0; padding: 1.45rem; position: relative; overflow: hidden;
+  }
+  .page:not(#page-home) .bg-card::before,
+  .page:not(#page-home) .biz-card::before,
+  .page:not(#page-home) .join-card::before {
+    content: ''; position: absolute; inset: 0 0 auto; height: 4px; background: var(--green);
+  }
+  .bg-card h3 { font-size: 17px; margin-bottom: 0.7rem; }
+  .type-block {
+    padding: 1.35rem; border: 1px solid rgba(8,80,65,0.1);
+    border-radius: var(--radius); background: white; box-shadow: 0 10px 28px rgba(0,0,0,0.03);
+  }
+  .type-hdr { margin-bottom: 1rem; border-bottom-color: rgba(8,80,65,0.12); }
+  .type-badge { border-radius: 999px; padding: 5px 12px; }
+  .org-grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+  .org-card { padding: 1rem; border-radius: var(--radius); }
+  .biz-card, .join-card {
+    position: relative; overflow: hidden; padding: 1.45rem;
+  }
+  .biz-num, .join-card-num {
+    width: 32px; height: 32px; box-shadow: inset 0 0 0 1px rgba(8,80,65,0.08);
+  }
+  .biz-tags { gap: 6px; margin-top: 0.85rem; }
+  .biz-tag, .r-tag, .meta-pill {
+    border-radius: 999px; padding: 4px 9px;
+  }
+  .task-list {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;
+  }
+  .task-item {
+    border-radius: var(--radius); padding: 1rem 1.1rem;
+    border-color: rgba(8,80,65,0.12); box-shadow: 0 10px 24px rgba(0,0,0,0.03);
+  }
+  .task-item.top { border-left-width: 4px; background: #f7fcfa; }
+  .decl-header {
+    background:
+      linear-gradient(90deg, rgba(5,42,35,0.95), rgba(15,110,86,0.88)),
+      url('assets/hero-community-care.jpg') center / cover no-repeat;
+    padding: 2.2rem; text-align: left; overflow: hidden;
+  }
+  .decl-header h3 { font-size: 20px; }
+  .decl-header p { font-size: 14px; }
+  .decl-body { gap: 12px; }
+  .decl-para, .decl-closing { padding: 1.35rem 1.5rem; }
+  .decl-para-label { font-size: 12px; color: var(--green-dark); }
+  .tl { padding-left: 2.4rem; }
+  .tl::before { left: 10px; background: linear-gradient(180deg, var(--green), var(--green-pale)); }
+  .tl-dot { left: -2.35rem; top: 8px; width: 22px; height: 22px; border-color: white; box-shadow: 0 0 0 1px rgba(8,80,65,0.12); }
+  .tl-card { border-left: 0; padding: 1.2rem 1.35rem; }
+  .tl-date { font-size: 12px; }
+  .join-hero {
+    position: relative; overflow: hidden; text-align: left; padding: 2.6rem;
+    background:
+      linear-gradient(90deg, rgba(5,42,35,0.94), rgba(15,110,86,0.82)),
+      url('assets/hero-community-care.jpg') center / cover no-repeat;
+  }
+  .join-hero h2 { font-size: 24px; }
+  .join-hero p { font-size: 15px; }
+  .join-contact {
+    border: 1px solid rgba(8,80,65,0.12);
+    background: linear-gradient(135deg, #f4fbf8 0%, #ffffff 100%);
+  }
+  .join-apply-btn { border-radius: var(--radius-sm); box-shadow: 0 14px 30px rgba(29,158,117,0.18); }
+  .news-grid, .result-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;
+  }
+  .news-card, .result-card {
+    padding: 1.25rem; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  }
+  .news-card:hover, .result-card:hover, .org-card:hover {
+    transform: translateY(-2px); border-color: var(--green-pale); box-shadow: 0 16px 34px rgba(8,80,65,0.09);
+  }
+  .news-title, .r-card-title { color: var(--green-dark); }
+  .roadmap-grid { gap: 12px; }
+  .roadmap-item { border-radius: var(--radius); padding: 1.2rem; box-shadow: 0 10px 24px rgba(0,0,0,0.04); }
+
   /* FOOTER */
   footer { background: var(--green-dark); color: rgba(255,255,255,0.75); padding: 2rem; }
   .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; gap: 1rem; }
@@ -333,13 +529,35 @@
   @media (max-width: 640px) {
     nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.5rem; }
     .nav-links { flex-wrap: wrap; justify-content: center; }
-    .hero { padding: 2.5rem 1rem; }
-    .hero h1 { font-size: 26px; }
+    .hero { min-height: 580px; padding: 4rem 1rem 2.5rem; background-position: 62% center; }
+    .hero h1 { font-size: 34px; }
+    .hero p { font-size: 15px; }
+    .hero-actions { align-items: stretch; flex-direction: column; }
+    .hero-btn { width: 100%; }
     .sec-title { font-size: 20px; }
     .section { padding: 2rem 1rem; }
+    #page-home .section { padding: 3rem 1rem; }
+    #page-home .section-alt { padding-left: 1rem; padding-right: 1rem; }
+    #page-home .sec-title { font-size: 24px; }
+    #page-home .sec-sub { font-size: 15px; line-height: 1.85; }
+    .home-intro-block { display: block; padding: 1.35rem; }
+    .page:not(#page-home) .section { width: 100%; padding: 3rem 1rem; }
+    .page:not(#page-home) .section:first-child { padding-top: 3.3rem; }
+    .page:not(#page-home) .section-alt { padding-left: 1rem; padding-right: 1rem; }
+    .page:not(#page-home) .sec-title { font-size: 25px; }
+    .page:not(#page-home) .sec-sub { font-size: 15px; line-height: 1.85; }
+    .page:not(#page-home) .section:first-child > .sec-sub { padding: 1.45rem; }
+    .page-intro-panel { min-height: 96px; grid-template-columns: 1fr; padding: 1.15rem; }
+    .page-intro-item { min-height: auto; }
+    .type-block { padding: 1rem; }
+    .org-grid, .task-list, .news-grid, .result-grid { grid-template-columns: 1fr; }
+    .decl-header, .join-hero { padding: 1.6rem; }
+    .decl-header h3, .join-hero h2 { font-size: 19px; }
     .vision-row, .biz-grid, .join-grid, .bg-grid { grid-template-columns: 1fr; }
     .roadmap-grid { grid-template-columns: repeat(2, 1fr); }
-    .stats { grid-template-columns: repeat(3, 1fr); }
+    .stats { width: calc(100% - 2rem); grid-template-columns: 1fr; margin-top: -1.4rem; }
+    .stat-item { padding: 1rem 1.2rem; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .stat-num { font-size: 26px; }
     .footer-top { flex-direction: column; }
     .footer-links { text-align: left; }
   }
@@ -362,10 +580,15 @@
 <!-- ══ 홈 ══ -->
 <div id="page-home" class="page active">
   <div class="hero">
-    <div class="hero-badge">부천사회연대경제통합돌봄네트워크</div>
-    <h1>사회연대경제로 연결하는<br>지역사회 통합돌봄 플랫폼</h1>
-    <p>사람을 살리는 돌봄은 관계에서 만들어집니다. 다양한 사회연대경제 조직이 함께 부천 시민 누구나 살던 곳에서 존엄하게 살아갈 수 있는 돌봄 생태계를 만들어갑니다.</p>
-    <a class="hero-btn" onclick="showPage('about')">네트워크 알아보기</a>
+    <div class="hero-content">
+      <div class="hero-badge">부천사회연대경제통합돌봄네트워크</div>
+      <h1>살던 곳에서 존엄하게,<br>돌봄을 지역의 힘으로</h1>
+      <p>협동조합, 사회적기업, 마을공동체와 비영리조직이 함께 연결되어 부천 시민의 일상 가까이에서 통합돌봄 생태계를 만들어갑니다.</p>
+      <div class="hero-actions">
+        <a class="hero-btn" onclick="showPage('about')">네트워크 알아보기</a>
+        <a class="hero-btn secondary" onclick="showPage('join')">함께 참여하기</a>
+      </div>
+    </div>
   </div>
   <div class="stats">
     <div class="stat-item"><div class="stat-num">23</div><div class="stat-label">참여 기관</div></div>
@@ -373,9 +596,13 @@
     <div class="stat-item"><div class="stat-num">18+</div><div class="stat-label">서비스 종목</div></div>
   </div>
   <div class="section">
-    <div class="sec-title">네트워크 소개</div>
-    <div class="divider"></div>
-    <div class="sec-sub">부천사회연대경제통합돌봄네트워크는 협동조합·사회적기업·마을공동체·비영리조직 등 다양한 사회연대경제 조직이 자발적으로 연대하여 구성한 통합돌봄 네트워크입니다.<br>사람과 공동체를 중심에 둔 사회연대경제의 힘으로, 국가와 시장이 채우지 못한 돌봄의 빈자리를 함께 채워갑니다.</div>
+    <div class="home-intro-block">
+      <div class="home-intro-heading">
+        <div class="sec-title">네트워크 소개</div>
+        <div class="divider"></div>
+      </div>
+      <div class="sec-sub">부천사회연대경제통합돌봄네트워크는 협동조합·사회적기업·마을공동체·비영리조직 등 다양한 사회연대경제 조직이 자발적으로 연대하여 구성한 통합돌봄 네트워크입니다.<br>사람과 공동체를 중심에 둔 사회연대경제의 힘으로, 국가와 시장이 채우지 못한 돌봄의 빈자리를 함께 채워갑니다.</div>
+    </div>
     <div class="vision-row">
       <div class="vision-card"><div class="v-label">비전</div><p>사회연대경제 기반 통합돌봄으로 시민 모두가 지역에서 존엄하게 살아가는 부천을 만든다.</p></div>
       <div class="vision-card"><div class="v-label">미션</div><p>참여 기관들의 협력과 연대를 통해 의료·돌봄·복지 서비스를 연계하고 지역사회 돌봄 생태계를 구축한다.</p></div>
@@ -472,6 +699,12 @@
   <div class="section">
     <div class="sec-title">사업 내용</div>
     <div class="divider"></div>
+    <div class="page-intro-panel">
+      <div class="page-intro-item">정책 개발</div>
+      <div class="page-intro-item">네트워크</div>
+      <div class="page-intro-item">공동사업 개발 및 추진</div>
+      <div class="page-intro-item">거버넌스</div>
+    </div>
     <div class="biz-grid">
       <div class="biz-card"><div class="biz-num">1</div><h3>정책 개발</h3><p>돌봄통합지원법(2024.3.6 제정) 시행을 위한 정책 연구와 현장 의견 수렴. 연합회 정책대응위원회 참여, 2026 지방선거 정책 제안, 경기도 사회적경제 활성화 사업 참여를 통해 현장의 목소리를 제도에 반영합니다.</p><div class="biz-tags"><span class="biz-tag">정책 연구</span><span class="biz-tag">제도화 추진</span><span class="biz-tag">정책 제안</span><span class="biz-tag">입법 대응</span></div></div>
       <div class="biz-card"><div class="biz-num">2</div><h3>네트워크</h3><p>부천 지역 참여 기관 간 정기 모임과 정보 공유로 협력 기반을 강화합니다. 통합돌봄플랫폼 포럼, 시민공론장, 네트워크 총회를 운영하며 부천형 통합돌봄 생태계를 함께 구축합니다.</p><div class="biz-tags"><span class="biz-tag">부천 네트워크</span><span class="biz-tag">정기 포럼</span><span class="biz-tag">시민공론장</span><span class="biz-tag">기관 간 연계</span></div></div>
@@ -658,6 +891,10 @@ function getPlainText(prop) {
   return '';
 }
 
+function pickProp(properties, keys) {
+  return keys.map(key => properties?.[key]).find(Boolean);
+}
+
 function getFileUrl(prop) {
   if (!prop?.files?.length) return '';
   const file = prop.files[0];
@@ -829,8 +1066,9 @@ async function loadResults() {
       const title = getPlainText(p.사업명) || getPlainText(p.제목) || '제목 없음';
       const desc = getPlainText(p.요약) || getPlainText(p.내용) || getPlainText(p.설명) || '';
       const details = summarizeDetails(p, ['사업명', '제목', '요약', '내용', '설명', '공개 여부']);
+      const yearProp = pickProp(p, ['연도', '년도', 'year']);
       return {
-        year: p.연도?.number ?? '',
+        year: yearProp?.number ?? yearProp?.select?.name ?? getPlainText(yearProp),
         period: getPlainText(p.기간),
         tag: p.분류?.select?.name || p.카테고리?.select?.name || '',
         title,
@@ -884,12 +1122,12 @@ async function loadNews() {
     rows.forEach(item => {
       const p = item.properties || {};
       const title = getPlainText(p.제목) || '제목 없음';
-      const date = p.날짜?.date?.start || '';
-      const source = getPlainText(p.출처);
-      const desc = getPlainText(p.요약) || getPlainText(p.내용) || '';
-      const link = p.링크?.url || '';
+      const date = pickProp(p, ['날짜', '보도일', '게시일'])?.date?.start || '';
+      const source = getPlainText(pickProp(p, ['출처', '매체명', '언론사']));
+      const desc = getPlainText(pickProp(p, ['요약', '내용 요약', '내용', '설명']));
+      const link = pickProp(p, ['링크', '원문 링크', '기사 링크'])?.url || '';
       const thumbnail = pickThumbnail(p);
-      const details = summarizeDetails(p, ['제목', '날짜', '출처', '요약', '내용', '링크', '썸네일', '대표이미지', '이미지', '사진', '공개 여부']);
+      const details = summarizeDetails(p, ['제목', '날짜', '보도일', '게시일', '출처', '매체명', '언론사', '요약', '내용 요약', '내용', '설명', '링크', '원문 링크', '기사 링크', '썸네일', '대표이미지', '이미지', '사진', '공개 여부']);
 
       const c = document.createElement('div');
       c.className = 'news-card clickable-card';
