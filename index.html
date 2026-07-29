@@ -549,6 +549,7 @@
   .lab-card p { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
   .lab-card ul { margin-top: 0.8rem; padding-left: 1rem; }
   .lab-card li { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+  .lab-kickoff { display: inline-block; margin-top: 0.75rem; padding: 5px 9px; border-radius: 999px; background: var(--green-bg); color: var(--green-dark); font-size: 12px; font-weight: 800; }
   .platform-row { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 14px; align-items: start; }
   .brand-box { background: white; border: 1px solid var(--green-pale); border-radius: var(--radius); padding: 1.5rem; }
   .brand-name { font-size: 34px; font-weight: 900; color: var(--green-dark); margin-bottom: 0.35rem; }
@@ -557,6 +558,14 @@
   .package-item { background: rgba(255,255,255,0.82); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem; }
   .package-item b { display: block; color: var(--green-dark); font-size: 14px; margin-bottom: 4px; }
   .package-item span { display: block; color: var(--text-sub); font-size: 12px; line-height: 1.55; }
+  .lab-resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .lab-resource-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.15rem; }
+  .lab-resource-card h3 { font-size: 17px; color: var(--green-dark); margin-bottom: 0.4rem; }
+  .lab-resource-note { font-size: 12px; color: var(--text-light); margin-bottom: 0.8rem; line-height: 1.65; }
+  .resource-list { display: grid; gap: 7px; }
+  .resource-item { padding: 0.75rem; border-radius: var(--radius-sm); background: var(--bg-alt); border: 1px solid rgba(0,0,0,0.04); }
+  .resource-name { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 3px; line-height: 1.45; }
+  .resource-text { font-size: 12px; color: var(--text-sub); line-height: 1.6; }
   .lab-log { display: grid; gap: 10px; }
   .lab-log-item { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 1rem; background: white; border: 1px solid var(--border); border-radius: var(--radius); }
   .lab-log-date { font-size: 12px; color: var(--green-dark); font-weight: 800; }
@@ -587,7 +596,7 @@
     .page-intro-panel { min-height: 96px; grid-template-columns: 1fr; padding: 1.15rem; }
     .page-intro-item { min-height: auto; }
     .type-block { padding: 1rem; }
-    .org-grid, .task-list, .news-grid, .result-grid, .lab-grid, .platform-row, .package-grid, .lab-hero { grid-template-columns: 1fr; }
+    .org-grid, .task-list, .news-grid, .result-grid, .lab-grid, .lab-resource-grid, .platform-row, .package-grid, .lab-hero { grid-template-columns: 1fr; }
     .lab-log-item { grid-template-columns: 1fr; }
     .decl-header, .join-hero { padding: 1.6rem; }
     .decl-header h3, .join-hero h2 { font-size: 19px; }
@@ -836,6 +845,7 @@
           <li>심층욕구조사 후 서비스 실험</li>
           <li>중장년 고립가구와 생활 사각지대 주목</li>
         </ul>
+        <div class="lab-kickoff">킥오프 2026. 7. 23.</div>
       </div>
     </div>
   </div>
@@ -858,11 +868,60 @@
     </div>
   </div>
   <div class="section section-alt">
+    <div class="sec-title">참여기관과 보유 자원</div>
+    <div class="divider"></div>
+    <div class="sec-sub">리빙랩 실행노트의 확정 참여조직과 제공 가능 자원을 기준으로 정리했습니다.</div>
+    <div class="lab-resource-grid">
+      <div class="lab-resource-card">
+        <h3>거점공간과 관계망</h3>
+        <div class="lab-resource-note">참여 확정 8곳</div>
+        <div class="resource-list">
+          <div class="resource-item"><div class="resource-name">경기두레생협</div><div class="resource-text">공간, 먹거리, 걷기·주민모임</div></div>
+          <div class="resource-item"><div class="resource-name">부천교육사회적협동조합</div><div class="resource-text">공간, 교육, 대상자 발굴</div></div>
+          <div class="resource-item"><div class="resource-name">부천마을대학협동조합</div><div class="resource-text">주민·건강교육, 운동</div></div>
+          <div class="resource-item"><div class="resource-name">시루작은도서관</div><div class="resource-text">공간, 교육·문화, 주민모임</div></div>
+          <div class="resource-item"><div class="resource-name">약대동통합돌봄협의회</div><div class="resource-text">대상자 발굴</div></div>
+          <div class="resource-item"><div class="resource-name">주식회사 튼튼한거북이</div><div class="resource-text">운동·걷기·교육</div></div>
+          <div class="resource-item"><div class="resource-name">우리마을주민기획단</div><div class="resource-text">공간, 주민모임, 교육·홍보</div></div>
+          <div class="resource-item"><div class="resource-name">부천의료복지사회적협동조합</div><div class="resource-text">공간, 건강상담</div></div>
+        </div>
+      </div>
+      <div class="lab-resource-card">
+        <h3>치매·인지·발달장애</h3>
+        <div class="lab-resource-note">참여 확정 9곳 · 킥오프 2026. 7. 29.</div>
+        <div class="resource-list">
+          <div class="resource-item"><div class="resource-name">행복한동행발전소</div><div class="resource-text">자립·직업훈련, 작업장, 생활지원</div></div>
+          <div class="resource-item"><div class="resource-name">더불어우리 사회적협동조합</div><div class="resource-text">직업훈련, 취업처 연계</div></div>
+          <div class="resource-item"><div class="resource-name">온별협동조합</div><div class="resource-text">동물교감, 정서지원, 자립훈련, 치매상담</div></div>
+          <div class="resource-item"><div class="resource-name">주식회사 컨텐츠다</div><div class="resource-text">VR교육, 자립·직업훈련, 인지재활 콘텐츠</div></div>
+          <div class="resource-item"><div class="resource-name">주식회사 튼튼한거북이</div><div class="resource-text">운동·걷기·문화예술·교육</div></div>
+          <div class="resource-item"><div class="resource-name">섬.나.돌</div><div class="resource-text">가족상담, 치매 선별·상담</div></div>
+          <div class="resource-item"><div class="resource-name">위인협동조합</div><div class="resource-text">운동·교육, 보호자·제공자 교육</div></div>
+          <div class="resource-item"><div class="resource-name">부천의료복지사회적협동조합</div><div class="resource-text">치매 선별·상담, 건강·의료연계</div></div>
+          <div class="resource-item"><div class="resource-name">경기장애인부모연대 부천지회</div><div class="resource-text">대상자 발굴, 낮활동, 가족상담, 직업훈련</div></div>
+        </div>
+      </div>
+      <div class="lab-resource-card">
+        <h3>1인가구</h3>
+        <div class="lab-resource-note">참여 확정 6곳 · 킥오프 2026. 7. 23.</div>
+        <div class="resource-list">
+          <div class="resource-item"><div class="resource-name">우렁각시매직케어</div><div class="resource-text">청소·생활환경 관리 자원 확인 예정</div></div>
+          <div class="resource-item"><div class="resource-name">사회적기업 에이앰피</div><div class="resource-text">문화예술·콘텐츠 자원 확인 예정</div></div>
+          <div class="resource-item"><div class="resource-name">(주)나눔과돌봄</div><div class="resource-text">1인가구 발굴, 안부·생활·디지털 지원</div></div>
+          <div class="resource-item"><div class="resource-name">사회적협동조합 플러스부천</div><div class="resource-text">대상자 발굴, 먹거리, 안부·생활지원</div></div>
+          <div class="resource-item"><div class="resource-name">부천YWCA돌봄과살림협동조합</div><div class="resource-text">안부·생활지원, 동행, 말벗</div></div>
+          <div class="resource-item"><div class="resource-name">부천의료복지사회적협동조합</div><div class="resource-text">건강·의료상담, 말벗</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section section-alt">
     <div class="sec-title">논의와 실행 기록</div>
     <div class="divider"></div>
     <div class="lab-log">
       <div class="lab-log-item"><div class="lab-log-date">2026. 6. 18.</div><div><h3>제2차 라운드테이블</h3><p>공동브랜드, 통합돌봄 패키지, 마을 자원 연결형 플랫폼의 필요를 논의했습니다.</p></div></div>
       <div class="lab-log-item"><div class="lab-log-date">2026. 7. 17.</div><div><h3>후속 참여의향조사 결과 정리</h3><p>19개 조직의 참여 의향과 제공 가능 자원을 정리하고, 3개 리빙랩 주제별 협력 가능성을 확인했습니다.</p></div></div>
+      <div class="lab-log-item"><div class="lab-log-date">2026. 7. 23.</div><div><h3>1인가구 리빙랩 킥오프</h3><p>6개 참여조직이 취약 1인가구 심층욕구조사, 8월 결과회의, 9월 서비스 실험 일정에 합의했습니다.</p></div></div>
       <div class="lab-log-item"><div class="lab-log-date">2026. 7. 24.</div><div><h3>리빙랩 운영계획 확정</h3><p>회의, 교육·자문, 현장 리빙랩, 사례회의·평가로 이어지는 공통 운영 구조를 정리했습니다.</p></div></div>
       <div class="lab-log-item"><div class="lab-log-date">2026. 7. 29.</div><div><h3>발달장애 리빙랩 킥오프</h3><p>특정 당사자 사례를 중심으로 욕구 파악, 공동 솔루션 설계, 실행 구조를 시험하기로 합의했습니다.</p></div></div>
     </div>
