@@ -525,6 +525,14 @@
   .detail-item { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 0.95rem; }
   .detail-label { font-size: 11px; color: var(--green); font-weight: 700; margin-bottom: 4px; }
   .detail-value { font-size: 15px; line-height: 1.8; color: var(--text-sub); white-space: pre-wrap; word-break: break-word; }
+  .modal-actions { display: flex; gap: 8px; margin-top: 1rem; flex-wrap: wrap; }
+  .modal-link-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 10px 14px; border-radius: var(--radius-sm);
+    background: var(--green); color: white; font-size: 13px; font-weight: 700;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .modal-link-btn:hover { background: var(--green-mid); }
 
   @media (max-width: 640px) {
     nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.5rem; }
@@ -740,6 +748,13 @@
     <div style="margin-top:2rem;">
       <div class="sec-title" style="font-size:16px;">사업 결과</div>
       <div class="divider"></div>
+      <div class="result-toolbar">
+        <button class="r-btn on" onclick="filterResult(this, '전체')">전체</button>
+        <button class="r-btn" onclick="filterResult(this, '정책')">정책</button>
+        <button class="r-btn" onclick="filterResult(this, '네트워크')">네트워크</button>
+        <button class="r-btn" onclick="filterResult(this, '공동사업')">공동사업</button>
+        <button class="r-btn" onclick="filterResult(this, '거버넌스')">거버넌스</button>
+      </div>
       <div class="result-grid" id="result-grid"></div>
     </div>
   </div>
@@ -777,9 +792,9 @@
     <div class="divider"></div>
     <div class="sec-sub">부천사회연대경제통합돌봄네트워크 관련 언론 보도 자료입니다.</div>
     <div class="news-grid" id="news-grid">
-      <div class="loading">보도 자료를 불러오는 중...</div>
+      <div class="loading">보도 자료를 준비하는 중...</div>
     </div>
-    <div class="news-notice">실제 언론 보도 자료를 Notion 데이터베이스에 등록하면 이 공간에 자동으로 표시됩니다.</div>
+    <div class="news-notice">목록을 클릭하면 사이트 안에서 보도 내용을 확인할 수 있습니다.</div>
   </div>
 </div>
 
@@ -872,7 +887,101 @@ renderOrgs('g-comm', orgs.comm);
 renderOrgs('g-np', orgs.np);
 
 
-let resultsData = [];
+const resultsData = [
+  {
+    year: '2026',
+    period: '2026. 3. 26.',
+    tag: '네트워크',
+    title: '통합돌봄플랫폼 포럼 및 공동선언문 채택',
+    desc: '부천시청 대강당에서 통합돌봄플랫폼 포럼을 개최하고 라운드테이블 논의 결과를 바탕으로 2026 공동선언문을 채택했습니다.',
+    details: [
+      { label: '일시', value: '2026년 3월 26일' },
+      { label: '주요 내용', value: '포럼 개최, 라운드테이블 운영, 참여자 의견 수렴, 공동선언문 채택' },
+      { label: '의미', value: '2026년 통합돌봄 제도 시행을 앞두고 사회연대경제 조직들이 지역사회 돌봄을 함께 책임지는 실천 방향을 공식화했습니다.' }
+    ]
+  },
+  {
+    year: '2026',
+    period: '2026. 3. 26.',
+    tag: '정책',
+    title: '2026년 네트워크 과제 우선순위 선정',
+    desc: '포럼 라운드테이블에서 참가자 39명이 직접 투표하여 2026년 부천사회연대경제통합돌봄네트워크의 주요 과제를 선정했습니다.',
+    details: [
+      { label: '참여', value: '포럼 라운드테이블 참가자 39명' },
+      { label: '상위 과제', value: '지금 당장 가능한 작은 실천 과제 발굴 및 실행, 정기적으로 만나고 소통하는 구조 만들기, 행정·복지·자원봉사와 협력한 통합돌봄 연계 체계 구축' },
+      { label: '활용', value: '2026년 사업계획, 정책 제안, 네트워크 정례회의 운영의 기준 자료로 활용합니다.' }
+    ]
+  },
+  {
+    year: '2025',
+    period: '2025. 9. 11.',
+    tag: '거버넌스',
+    title: '통합돌봄 시민공론장 개최',
+    desc: '지역 시민과 함께 통합돌봄의 방향을 논의하는 공론장을 열고 부천형 통합돌봄의 필요와 과제를 확인했습니다.',
+    details: [
+      { label: '일시', value: '2025년 9월 11일' },
+      { label: '주요 내용', value: '통합돌봄 의제 공유, 시민 의견 수렴, 지역사회 협력 필요성 확인' },
+      { label: '후속 흐름', value: '부천사회연대경제통합돌봄네트워크 전환과 2026년 포럼·공동선언문 논의로 이어졌습니다.' }
+    ]
+  },
+  {
+    year: '2025',
+    period: '2025. 7. 31.',
+    tag: '네트워크',
+    title: '부천사회연대경제 추진단 발족',
+    desc: '통합돌봄 네트워크 구축을 위한 추진단을 발족하고 사회연대경제 조직 간 협력 논의를 본격화했습니다.',
+    details: [
+      { label: '일시', value: '2025년 7월 31일' },
+      { label: '주요 내용', value: '추진단 구성, 통합돌봄 의제 논의, 참여기관 협력 기반 마련' },
+      { label: '의미', value: '개별 기관의 활동을 넘어 부천 지역 단위의 통합돌봄 협력 구조를 만드는 출발점이 되었습니다.' }
+    ]
+  },
+  {
+    year: '2026',
+    period: '2026. 4월~9월',
+    tag: '공동사업',
+    title: '자원조사·모델설계·시범사업 리빙랩 추진',
+    desc: '지역 돌봄 자원조사와 간담회, 모델 설계, 시범사업 리빙랩을 통해 부천형 통합돌봄 실행 모델을 준비합니다.',
+    details: [
+      { label: '기간', value: '2026년 4월~9월' },
+      { label: '추진 과정', value: '자원조사 및 지역간담회 → 통합돌봄 모델 설계 → 시범사업 리빙랩 운영' },
+      { label: '목표', value: '참여기관의 실제 서비스와 지역 자원을 연결해 시민이 체감할 수 있는 통합돌봄 실행 모델을 만듭니다.' }
+    ]
+  }
+];
+
+const newsData = [
+  {
+    date: '2026. 3. 26.',
+    source: '네트워크 소식',
+    title: '부천사회연대경제통합돌봄네트워크, 통합돌봄플랫폼 포럼 개최',
+    desc: '부천사회연대경제통합돌봄네트워크가 통합돌봄플랫폼 포럼을 열고 지역 기반 통합돌봄의 방향과 공동 실천 과제를 논의했습니다.',
+    details: [
+      { label: '주요 내용', value: '통합돌봄 제도 전환에 맞춰 사회연대경제 조직의 역할을 논의하고, 라운드테이블을 통해 공동 실천 방향을 모았습니다.' },
+      { label: '핵심 메시지', value: '돌봄은 정책만이 아니라 지역 안의 관계와 협력으로 작동해야 하며, 사회연대경제가 그 연결 기반이 될 수 있습니다.' }
+    ]
+  },
+  {
+    date: '2026. 3. 26.',
+    source: '네트워크 소식',
+    title: '2026 공동선언문 채택',
+    desc: '참여 기관들은 공동선언문을 통해 부천의 사회연대경제 조직들이 지속가능한 통합돌봄 체계를 함께 만들어갈 것을 선언했습니다.',
+    details: [
+      { label: '선언 방향', value: '정기적인 만남과 소통, 행정·복지·자원봉사와의 연계, 부천형 통합돌봄 로드맵 공동 설계, 돌봄기금 조성, 시민 참여 확대' },
+      { label: '의미', value: '네트워크가 단순한 모임을 넘어 공동의 책임과 실행을 약속하는 지역사회 협력 플랫폼으로 나아가는 계기입니다.' }
+    ]
+  },
+  {
+    date: '2025. 9. 11.',
+    source: '네트워크 소식',
+    title: '통합돌봄 시민공론장 개최',
+    desc: '부천 지역 시민과 사회연대경제 조직들이 함께 통합돌봄의 필요와 지역사회 협력 과제를 논의했습니다.',
+    details: [
+      { label: '주요 내용', value: '고령화, 1인가구 증가, 만성질환, 고립 문제에 대응하기 위해 지역사회가 함께 책임지는 돌봄 구조를 논의했습니다.' },
+      { label: '후속 흐름', value: '시민공론장 논의는 추진단 활동과 정식 네트워크 전환, 2026년 포럼으로 이어졌습니다.' }
+    ]
+  }
+];
 let curFilter = '전체';
 
 function escapeHtml(value) {
@@ -882,63 +991,6 @@ function escapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
-}
-
-function getPlainText(prop) {
-  if (!prop) return '';
-  if (prop.title) return prop.title.map(v => v.plain_text).join('');
-  if (prop.rich_text) return prop.rich_text.map(v => v.plain_text).join('');
-  return '';
-}
-
-function pickProp(properties, keys) {
-  return keys.map(key => properties?.[key]).find(Boolean);
-}
-
-function getFileUrl(prop) {
-  if (!prop?.files?.length) return '';
-  const file = prop.files[0];
-  return file?.file?.url || file?.external?.url || '';
-}
-
-function pickThumbnail(properties) {
-  const candidates = ['썸네일', '대표이미지', '이미지', '사진', 'image', 'thumbnail'];
-  for (const key of candidates) {
-    if (properties[key]) {
-      const url = getFileUrl(properties[key]);
-      if (url) return url;
-    }
-  }
-  return '';
-}
-
-function normalizePropValue(prop) {
-  if (!prop) return '';
-  if (prop.title) return getPlainText(prop);
-  if (prop.rich_text) return getPlainText(prop);
-  if (prop.select) return prop.select?.name || '';
-  if (prop.multi_select) return (prop.multi_select || []).map(v => v.name).join(', ');
-  if (prop.date) return prop.date?.start || '';
-  if (prop.number !== undefined && prop.number !== null) return String(prop.number);
-  if (prop.url) return prop.url;
-  if (prop.email) return prop.email;
-  if (prop.phone_number) return prop.phone_number;
-  if (prop.checkbox !== undefined) return prop.checkbox ? '예' : '아니오';
-  if (prop.status) return prop.status?.name || '';
-  if (prop.relation) return `${prop.relation.length}개 연결`;
-  if (prop.files) return prop.files.map(f => f.name || f.external?.url || f.file?.url || '').join(', ');
-  return '';
-}
-
-function summarizeDetails(properties, excludeKeys = []) {
-  const items = [];
-  Object.entries(properties || {}).forEach(([key, prop]) => {
-    if (excludeKeys.includes(key)) return;
-    const value = normalizePropValue(prop);
-    if (!value) return;
-    items.push({ label: key, value });
-  });
-  return items;
 }
 
 function openDetailModal(payload) {
@@ -984,7 +1036,7 @@ function openDetailModal(payload) {
     linkBtn.href = payload.link;
     linkBtn.target = '_blank';
     linkBtn.rel = 'noopener noreferrer';
-    linkBtn.textContent = '기사 원문 보기';
+    linkBtn.textContent = payload.actionLabel || '원문 보기';
     actionsEl.appendChild(linkBtn);
     actionsEl.style.display = 'flex';
   }
@@ -1036,7 +1088,12 @@ function renderResultsTo(containerId, useFilter = false) {
       title: r.title,
       thumbnail: r.thumbnail,
       meta: [r.tag, yearLabel, r.period].filter(Boolean),
-      details: r.details
+      details: [
+        ...(r.desc ? [{ label: '요약', value: r.desc }] : []),
+        ...(r.details || [])
+      ],
+      link: r.link,
+      actionLabel: '관련 자료 보기'
     }));
     g.appendChild(c);
   });
@@ -1047,47 +1104,11 @@ function renderResults() {
   renderResultsTo('home-result-grid', false);
 }
 
-async function loadResults() {
+function loadResults() {
   const g = document.getElementById('result-grid');
   const hg = document.getElementById('home-result-grid');
   if (!g && !hg) return;
-
-  try {
-    if (g) g.innerHTML = '<div class="loading">사업 결과를 불러오는 중...</div>';
-    if (hg) hg.innerHTML = '<div class="loading">사업 결과를 불러오는 중...</div>';
-    const res = await fetch('/api/notion?type=results');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    const data = await res.json();
-    const rows = Array.isArray(data.results) ? data.results : [];
-
-    resultsData = rows.map(item => {
-      const p = item.properties || {};
-      const title = getPlainText(p.사업명) || getPlainText(p.제목) || '제목 없음';
-      const desc = getPlainText(p.요약) || getPlainText(p.내용) || getPlainText(p.설명) || '';
-      const details = summarizeDetails(p, ['사업명', '제목', '요약', '내용', '설명', '공개 여부']);
-      const yearProp = pickProp(p, ['연도', '년도', 'year']);
-      return {
-        year: yearProp?.number ?? yearProp?.select?.name ?? getPlainText(yearProp),
-        period: getPlainText(p.기간),
-        tag: p.분류?.select?.name || p.카테고리?.select?.name || '',
-        title,
-        desc,
-        thumbnail: pickThumbnail(p),
-        details: [
-          ...(desc ? [{ label: '내용', value: desc }] : []),
-          ...details
-        ],
-      };
-    });
-
-    renderResults();
-  } catch (err) {
-    console.error('사업결과 불러오기 실패:', err);
-    const msg = '<div class="news-notice">사업 결과를 불러오지 못했습니다. Vercel 환경변수와 Notion 연동을 확인해 주세요.</div>';
-    if (g) g.innerHTML = msg;
-    if (hg) hg.innerHTML = msg;
-  }
+  renderResults();
 }
 
 function filterResult(btn, tag) {
@@ -1097,65 +1118,41 @@ function filterResult(btn, tag) {
   renderResults();
 }
 
-function toggleForm() {
-  document.getElementById('form-box').classList.toggle('open');
-}
-
-async function loadNews() {
+function loadNews() {
   const g = document.getElementById('news-grid');
   if (!g) return;
 
-  try {
-    g.innerHTML = '<div class="loading">보도 자료를 불러오는 중...</div>';
-    const res = await fetch('/api/notion?type=news');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-    const data = await res.json();
-    const rows = Array.isArray(data.results) ? data.results : [];
-
-    if (!rows.length) {
-      g.innerHTML = '<div class="news-notice">등록된 언론보도가 없습니다.</div>';
-      return;
-    }
-
-    g.innerHTML = '';
-    rows.forEach(item => {
-      const p = item.properties || {};
-      const title = getPlainText(p.제목) || '제목 없음';
-      const date = pickProp(p, ['날짜', '보도일', '게시일'])?.date?.start || '';
-      const source = getPlainText(pickProp(p, ['출처', '매체명', '언론사']));
-      const desc = getPlainText(pickProp(p, ['요약', '내용 요약', '내용', '설명']));
-      const link = pickProp(p, ['링크', '원문 링크', '기사 링크'])?.url || '';
-      const thumbnail = pickThumbnail(p);
-      const details = summarizeDetails(p, ['제목', '날짜', '보도일', '게시일', '출처', '매체명', '언론사', '요약', '내용 요약', '내용', '설명', '링크', '원문 링크', '기사 링크', '썸네일', '대표이미지', '이미지', '사진', '공개 여부']);
-
-      const c = document.createElement('div');
-      c.className = 'news-card clickable-card';
-      c.innerHTML = `
-        ${thumbnail ? `<img class="card-thumb" src="${escapeHtml(thumbnail)}" alt="${escapeHtml(title)}">` : ''}
-        <div class="news-meta">
-          <span class="news-source">${escapeHtml(source)}</span>
-          <span class="news-date">${escapeHtml(date)}</span>
-        </div>
-        <div class="news-title">${escapeHtml(title)}</div>
-        <div class="news-desc">${escapeHtml(desc)}</div>
-      `;
-      c.addEventListener('click', () => openDetailModal({
-        title,
-        thumbnail,
-        meta: [source, date].filter(Boolean),
-        details: [
-          ...(desc ? [{ label: '요약', value: desc }] : []),
-          ...details
-        ],
-        link
-      }));
-      g.appendChild(c);
-    });
-  } catch (err) {
-    console.error('뉴스 불러오기 실패:', err);
-    g.innerHTML = '<div class="news-notice">언론보도를 불러오지 못했습니다. Vercel 환경변수와 Notion 연동을 확인해 주세요.</div>';
+  if (!newsData.length) {
+    g.innerHTML = '<div class="news-notice">등록된 언론보도가 없습니다.</div>';
+    return;
   }
+
+  g.innerHTML = '';
+  newsData.forEach(item => {
+    const c = document.createElement('div');
+    c.className = 'news-card clickable-card';
+    c.innerHTML = `
+      ${item.thumbnail ? `<img class="card-thumb" src="${escapeHtml(item.thumbnail)}" alt="${escapeHtml(item.title)}">` : ''}
+      <div class="news-meta">
+        <span class="news-source">${escapeHtml(item.source)}</span>
+        <span class="news-date">${escapeHtml(item.date)}</span>
+      </div>
+      <div class="news-title">${escapeHtml(item.title)}</div>
+      <div class="news-desc">${escapeHtml(item.desc)}</div>
+    `;
+    c.addEventListener('click', () => openDetailModal({
+      title: item.title,
+      thumbnail: item.thumbnail,
+      meta: [item.source, item.date].filter(Boolean),
+      details: [
+        ...(item.desc ? [{ label: '요약', value: item.desc }] : []),
+        ...(item.details || [])
+      ],
+      link: item.link,
+      actionLabel: '기사 원문 보기'
+    }));
+    g.appendChild(c);
+  });
 }
 
 function showPage(id) {
