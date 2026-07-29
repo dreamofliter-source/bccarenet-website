@@ -67,12 +67,13 @@
   }
   .hero-content { width: min(980px, 100%); margin: 0 auto; }
   .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.34);
-    border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 700;
-    line-height: 1.4; margin-bottom: 1.1rem; color: white; backdrop-filter: blur(8px);
+    display: inline-flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.38);
+    border-radius: 999px; padding: 12px 22px; font-size: clamp(24px, 3.4vw, 46px); font-weight: 900;
+    line-height: 1.22; margin-bottom: 1.25rem; color: white; backdrop-filter: blur(8px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.18);
   }
-  .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green-light); }
+  .hero-badge::before { content: ''; width: 13px; height: 13px; border-radius: 50%; background: var(--green-light); flex-shrink: 0; }
   .hero h1 { font-size: clamp(34px, 5vw, 58px); font-weight: 700; line-height: 1.22; margin-bottom: 1rem; color: white; max-width: 720px; }
   .hero p { font-size: 17px; line-height: 1.85; max-width: 640px; margin: 0 0 1.7rem; color: rgba(255,255,255,0.88); }
   .hero-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -502,16 +503,6 @@
 
   /* DETAIL MODAL */
   .card-thumb { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm); margin-bottom: 0.75rem; background: var(--bg-alt); border: 1px solid var(--border); }
-  .thumb-wrap { position: relative; margin-bottom: 0.75rem; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); background: var(--bg-alt); }
-  .thumb-wrap .card-thumb { display: block; margin-bottom: 0; border: none; border-radius: 0; }
-  .thumb-label {
-    position: absolute; left: 10px; right: 10px; bottom: 10px;
-    padding: 9px 10px; border-radius: var(--radius-sm);
-    background: rgba(5,42,35,0.9); color: white;
-    font-size: clamp(17px, 2.15vw, 28px); font-weight: 900; line-height: 1.22;
-    text-align: center; word-break: keep-all;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-  }
   .clickable-card { cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
   .clickable-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
   .meta-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.5rem; }
@@ -1131,7 +1122,6 @@ const resultsData = [
     date: '2026년 7월 24일',
     desc: '3개 팀의 참여조직과 기관별 보유자원, 회의·교육·현장실행·평가 구조를 운영계획 산출물로 확정했습니다.',
     thumbnail: 'assets/result-livinglab-plan.png',
-    imageLabel: '부천사회연대경제통합돌봄네트워크',
     photos: ['assets/result-livinglab-plan.png', 'assets/result-roundtable-main.jpeg', 'assets/result-roundtable-board.jpeg'],
     content: '라운드테이블 후속 참여의향조사와 확정 명단을 기준으로 3개 리빙랩 그룹의 참여조직을 구성하고, 기관별 보유자원과 운영 구조를 정리했습니다.\n\n운영계획은 회의, 교육·자문, 현장 리빙랩, 사례회의·평가로 이어지며, 거점공간과 관계망, 치매·인지·발달장애, 1인가구 주제별로 세부 역할을 계속 구체화해 나가는 방식입니다.'
   }
@@ -1284,7 +1274,7 @@ function renderResultsTo(containerId, useFilter = false) {
     const dateLabel = r.period || (r.year ? `${r.year}년` : '');
     const tagClass = escapeHtml(r.tag || '');
     c.innerHTML = `
-      ${r.thumbnail ? `<div class="thumb-wrap"><img class="card-thumb" src="${escapeHtml(r.thumbnail)}" alt="${escapeHtml(r.title)}">${r.imageLabel ? `<div class="thumb-label">${escapeHtml(r.imageLabel)}</div>` : ''}</div>` : ''}
+      ${r.thumbnail ? `<img class="card-thumb" src="${escapeHtml(r.thumbnail)}" alt="${escapeHtml(r.title)}">` : ''}
       <div class="r-year">${escapeHtml(dateLabel)}</div>
       <div class="r-tag ${tagClass}">${escapeHtml(r.tag)}</div>
       <div class="r-card-title">${escapeHtml(r.title)}</div>
