@@ -306,6 +306,7 @@
   .r-tag.네트워크 { background: var(--green-bg); color: var(--green-dark); }
   .r-tag.공동사업 { background: #EEEDFE; color: #26215C; }
   .r-tag.거버넌스 { background: #FAEEDA; color: #412402; }
+  .r-tag.리빙랩 { background: #FDECEA; color: #6E1C12; }
   .r-card-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; line-height: 1.45; }
   .r-card-desc { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
   .add-btn {
@@ -521,6 +522,8 @@
     width: 34px; height: 34px; font-size: 18px; color: var(--text-sub); flex-shrink: 0;
   }
   .modal-thumb { width: 100%; max-height: 320px; object-fit: cover; border-radius: var(--radius); margin-bottom: 1rem; border: 1px solid var(--border); background: var(--bg-alt); }
+  .modal-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin: -0.2rem 0 1rem; }
+  .modal-gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-alt); }
   .detail-grid { display: grid; gap: 10px; }
   .detail-item { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.85rem 0.95rem; }
   .detail-label { font-size: 11px; color: var(--green); font-weight: 700; margin-bottom: 4px; }
@@ -533,6 +536,32 @@
     text-decoration: none; transition: background 0.15s;
   }
   .modal-link-btn:hover { background: var(--green-mid); }
+
+  /* LIVING LAB */
+  .lab-hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: stretch; }
+  .lab-hero-copy { padding: 2rem; border-radius: var(--radius); background: var(--green-dark); color: white; }
+  .lab-hero-copy h2 { font-size: 28px; line-height: 1.35; margin-bottom: 0.8rem; }
+  .lab-hero-copy p { font-size: 16px; line-height: 1.9; color: rgba(255,255,255,0.86); }
+  .lab-hero-img { min-height: 280px; border-radius: var(--radius); background: url('assets/result-roundtable-main.jpeg') center / cover no-repeat; border: 1px solid var(--border); }
+  .lab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .lab-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.15rem; }
+  .lab-card h3 { font-size: 17px; color: var(--green-dark); margin-bottom: 0.55rem; }
+  .lab-card p { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
+  .lab-card ul { margin-top: 0.8rem; padding-left: 1rem; }
+  .lab-card li { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+  .platform-row { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 14px; align-items: start; }
+  .brand-box { background: white; border: 1px solid var(--green-pale); border-radius: var(--radius); padding: 1.5rem; }
+  .brand-name { font-size: 34px; font-weight: 900; color: var(--green-dark); margin-bottom: 0.35rem; }
+  .brand-box p { color: var(--text-sub); font-size: 14px; line-height: 1.8; }
+  .package-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .package-item { background: rgba(255,255,255,0.82); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem; }
+  .package-item b { display: block; color: var(--green-dark); font-size: 14px; margin-bottom: 4px; }
+  .package-item span { display: block; color: var(--text-sub); font-size: 12px; line-height: 1.55; }
+  .lab-log { display: grid; gap: 10px; }
+  .lab-log-item { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 1rem; background: white; border: 1px solid var(--border); border-radius: var(--radius); }
+  .lab-log-date { font-size: 12px; color: var(--green-dark); font-weight: 800; }
+  .lab-log-item h3 { font-size: 16px; margin-bottom: 4px; }
+  .lab-log-item p { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
 
   @media (max-width: 640px) {
     nav { padding: 0.75rem 1rem; flex-direction: column; gap: 0.5rem; }
@@ -558,7 +587,8 @@
     .page-intro-panel { min-height: 96px; grid-template-columns: 1fr; padding: 1.15rem; }
     .page-intro-item { min-height: auto; }
     .type-block { padding: 1rem; }
-    .org-grid, .task-list, .news-grid, .result-grid { grid-template-columns: 1fr; }
+    .org-grid, .task-list, .news-grid, .result-grid, .lab-grid, .platform-row, .package-grid, .lab-hero { grid-template-columns: 1fr; }
+    .lab-log-item { grid-template-columns: 1fr; }
     .decl-header, .join-hero { padding: 1.6rem; }
     .decl-header h3, .join-hero h2 { font-size: 19px; }
     .vision-row, .biz-grid, .join-grid, .bg-grid { grid-template-columns: 1fr; }
@@ -580,6 +610,7 @@
     <button onclick="showPage('about')">소개</button>
     <button onclick="showPage('orgs')">참여기관</button>
     <button onclick="showPage('biz')">사업내용</button>
+    <button onclick="showPage('livinglab')">리빙랩</button>
     <button onclick="showPage('join')">가입안내</button>
     <button onclick="showPage('news')">언론보도</button>
   </div>
@@ -754,8 +785,85 @@
         <button class="r-btn" onclick="filterResult(this, '네트워크')">네트워크</button>
         <button class="r-btn" onclick="filterResult(this, '공동사업')">공동사업</button>
         <button class="r-btn" onclick="filterResult(this, '거버넌스')">거버넌스</button>
+        <button class="r-btn" onclick="filterResult(this, '리빙랩')">리빙랩</button>
       </div>
       <div class="result-grid" id="result-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 리빙랩 ══ -->
+<div id="page-livinglab" class="page">
+  <div class="section">
+    <div class="sec-title">리빙랩과 공동플랫폼</div>
+    <div class="divider"></div>
+    <div class="lab-hero">
+      <div class="lab-hero-copy">
+        <h2>라운드테이블에서 나온 이야기를 실제 실험으로 연결합니다</h2>
+        <p>부천사회연대경제 통합돌봄 리빙랩은 참여기관의 자원과 주민의 생활 욕구를 연결해 보는 실행 과정입니다. 공동브랜드와 통합돌봄 플랫폼 논의를 바탕으로, 3개 주제의 현장 실험을 준비하고 있습니다.</p>
+      </div>
+      <div class="lab-hero-img" aria-label="제2차 라운드테이블 현장 사진"></div>
+    </div>
+  </div>
+  <div class="section section-alt">
+    <div class="sec-title">3개 리빙랩 주제</div>
+    <div class="divider"></div>
+    <div class="sec-sub">라운드테이블 후속 참여의향조사와 2026년 7월 실행관리 구조를 기준으로 정리한 우선 실행 주제입니다.</div>
+    <div class="lab-grid">
+      <div class="lab-card">
+        <h3>거점공간과 관계망</h3>
+        <p>생활권 거점, 주민활동가, 돌봄자원 지도, 밥상·걷기 모임을 연결해 마을 안의 관계망을 만드는 주제입니다.</p>
+        <ul>
+          <li>참여 확정 8곳</li>
+          <li>주민활동가 발굴·교육</li>
+          <li>작은도서관·마을공간 기반 돌봄거점</li>
+        </ul>
+      </div>
+      <div class="lab-card">
+        <h3>치매·인지·발달장애</h3>
+        <p>발달장애인 자립생활, 인지·정서 지원, 가족돌봄자 지원을 사례 중심으로 조합해 보는 주제입니다.</p>
+        <ul>
+          <li>참여 확정 9곳</li>
+          <li>공동 상담과 서비스 설계</li>
+          <li>콘텐츠·동물교감·신체활동·의료연계</li>
+        </ul>
+      </div>
+      <div class="lab-card">
+        <h3>1인가구</h3>
+        <p>경제·사회·건강 면에서 취약한 1인가구를 발굴하고, 안부·생활지원·건강관리·관계 서비스를 함께 설계합니다.</p>
+        <ul>
+          <li>참여 확정 6곳</li>
+          <li>심층욕구조사 후 서비스 실험</li>
+          <li>중장년 고립가구와 생활 사각지대 주목</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="sec-title">공동브랜드와 플랫폼 방향</div>
+    <div class="divider"></div>
+    <div class="platform-row">
+      <div class="brand-box">
+        <div class="brand-name">마을ON</div>
+        <p>특정 기관의 단일 사업이 아니라, 지역사회가 함께 운영하는 통합돌봄 플랫폼 방향입니다. 마을의 자원을 연결하여 주민의 삶을 돌보는 구조를 지향합니다.</p>
+      </div>
+      <div class="package-grid">
+        <div class="package-item"><b>안부ON</b><span>1인가구 안부·건강관리</span></div>
+        <div class="package-item"><b>자립ON</b><span>장애인 자립생활 지원</span></div>
+        <div class="package-item"><b>건강ON</b><span>식사·운동·관계망 형성</span></div>
+        <div class="package-item"><b>동행ON</b><span>치매·경도인지장애 마을돌봄</span></div>
+        <div class="package-item"><b>생활ON</b><span>의료·돌봄·생활 통합지원</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="section section-alt">
+    <div class="sec-title">논의와 실행 기록</div>
+    <div class="divider"></div>
+    <div class="lab-log">
+      <div class="lab-log-item"><div class="lab-log-date">2026. 6. 18.</div><div><h3>제2차 라운드테이블</h3><p>공동브랜드, 통합돌봄 패키지, 마을 자원 연결형 플랫폼의 필요를 논의했습니다.</p></div></div>
+      <div class="lab-log-item"><div class="lab-log-date">2026. 7. 17.</div><div><h3>후속 참여의향조사 결과 정리</h3><p>19개 조직의 참여 의향과 제공 가능 자원을 정리하고, 3개 리빙랩 주제별 협력 가능성을 확인했습니다.</p></div></div>
+      <div class="lab-log-item"><div class="lab-log-date">2026. 7. 24.</div><div><h3>리빙랩 운영계획 확정</h3><p>회의, 교육·자문, 현장 리빙랩, 사례회의·평가로 이어지는 공통 운영 구조를 정리했습니다.</p></div></div>
+      <div class="lab-log-item"><div class="lab-log-date">2026. 7. 29.</div><div><h3>발달장애 리빙랩 킥오프</h3><p>특정 당사자 사례를 중심으로 욕구 파악, 공동 솔루션 설계, 실행 구조를 시험하기로 합의했습니다.</p></div></div>
     </div>
   </div>
 </div>
@@ -806,6 +914,7 @@
       <button class="modal-close" onclick="closeDetailModal()" aria-label="닫기">×</button>
     </div>
     <img id="modal-thumb" class="modal-thumb" style="display:none;" alt="thumbnail">
+    <div id="modal-gallery" class="modal-gallery" style="display:none;"></div>
     <div class="meta-stack" id="modal-meta"></div>
     <div class="detail-grid" id="modal-details"></div>
     <div class="modal-actions" id="modal-actions" style="display:none;"></div>
@@ -827,6 +936,7 @@
       <a onclick="showPage('about')">소개</a>
       <a onclick="showPage('orgs')">참여기관</a>
       <a onclick="showPage('biz')">사업내용</a>
+      <a onclick="showPage('livinglab')">리빙랩</a>
       <a onclick="showPage('join')">가입안내</a>
       <a onclick="showPage('news')">언론보도</a>
     </div>
@@ -889,64 +999,70 @@ renderOrgs('g-np', orgs.np);
 
 const resultsData = [
   {
-    year: '2026',
-    period: '2026. 3. 26.',
+    year: '2025',
+    period: '2025. 7. 31.',
     tag: '네트워크',
-    title: '통합돌봄플랫폼 포럼 및 공동선언문 채택',
-    desc: '부천시청 대강당에서 통합돌봄플랫폼 포럼을 개최하고 라운드테이블 논의 결과를 바탕으로 2026 공동선언문을 채택했습니다.',
-    details: [
-      { label: '일시', value: '2026년 3월 26일' },
-      { label: '주요 내용', value: '포럼 개최, 라운드테이블 운영, 참여자 의견 수렴, 공동선언문 채택' },
-      { label: '의미', value: '2026년 통합돌봄 제도 시행을 앞두고 사회연대경제 조직들이 지역사회 돌봄을 함께 책임지는 실천 방향을 공식화했습니다.' }
-    ]
-  },
-  {
-    year: '2026',
-    period: '2026. 3. 26.',
-    tag: '정책',
-    title: '2026년 네트워크 과제 우선순위 선정',
-    desc: '포럼 라운드테이블에서 참가자 39명이 직접 투표하여 2026년 부천사회연대경제통합돌봄네트워크의 주요 과제를 선정했습니다.',
-    details: [
-      { label: '참여', value: '포럼 라운드테이블 참가자 39명' },
-      { label: '상위 과제', value: '지금 당장 가능한 작은 실천 과제 발굴 및 실행, 정기적으로 만나고 소통하는 구조 만들기, 행정·복지·자원봉사와 협력한 통합돌봄 연계 체계 구축' },
-      { label: '활용', value: '2026년 사업계획, 정책 제안, 네트워크 정례회의 운영의 기준 자료로 활용합니다.' }
-    ]
+    title: '부천 사회연대경제 통합돌봄추진단 출범식',
+    date: '2025년 7월 31일',
+    desc: '지역 내 사회적경제 조직 관계자들이 모여 지속 가능한 지역 돌봄 실현을 위한 결집과 공동 실천 의지를 확인했습니다.',
+    thumbnail: 'assets/press-saebucheon-launch.png',
+    photos: ['assets/press-saebucheon-launch.png'],
+    content: '부천 사회연대경제 통합돌봄추진단 출범식은 2026년 돌봄통합지원법 시행을 앞두고, 지역사회 내 다양한 주체들이 일상에서 실천하는 돌봄 구조를 사회적경제 조직 중심으로 함께 논의하고 준비하기 위해 마련되었습니다.\n\n행사에서는 추진 경과보고, 선언문 낭독, 기념 촬영과 함께 지역사회 중심 통합돌봄 현황과 향후 과제를 공유했습니다.'
   },
   {
     year: '2025',
     period: '2025. 9. 11.',
     tag: '거버넌스',
-    title: '통합돌봄 시민공론장 개최',
-    desc: '지역 시민과 함께 통합돌봄의 방향을 논의하는 공론장을 열고 부천형 통합돌봄의 필요와 과제를 확인했습니다.',
-    details: [
-      { label: '일시', value: '2025년 9월 11일' },
-      { label: '주요 내용', value: '통합돌봄 의제 공유, 시민 의견 수렴, 지역사회 협력 필요성 확인' },
-      { label: '후속 흐름', value: '부천사회연대경제통합돌봄네트워크 전환과 2026년 포럼·공동선언문 논의로 이어졌습니다.' }
-    ]
-  },
-  {
-    year: '2025',
-    period: '2025. 7. 31.',
-    tag: '네트워크',
-    title: '부천사회연대경제 추진단 발족',
-    desc: '통합돌봄 네트워크 구축을 위한 추진단을 발족하고 사회연대경제 조직 간 협력 논의를 본격화했습니다.',
-    details: [
-      { label: '일시', value: '2025년 7월 31일' },
-      { label: '주요 내용', value: '추진단 구성, 통합돌봄 의제 논의, 참여기관 협력 기반 마련' },
-      { label: '의미', value: '개별 기관의 활동을 넘어 부천 지역 단위의 통합돌봄 협력 구조를 만드는 출발점이 되었습니다.' }
-    ]
+    title: '지역이 잇는 돌봄과 사회연대경제 시민공론장',
+    date: '2025년 9월 11일',
+    desc: '부천시청 판타스틱큐브에서 지역 돌봄 생태계를 함께 그려보기 위한 시민공론장을 개최했습니다.',
+    thumbnail: 'assets/press-kongnews-forum.png',
+    photos: ['assets/press-kongnews-forum.png'],
+    content: '시민공론장 「지역이 잇는 돌봄과 사회연대경제」는 2026년 돌봄통합지원법 시행을 앞두고, 지난 6년간 부천에서 축적한 통합돌봄 경험을 돌아보고 앞으로의 지역 돌봄 생태계를 논의하기 위해 마련되었습니다.\n\n부천사회연대경제통합돌봄추진단, 부천지역노사민정협의회, 부천시사회적경제지원센터가 공동으로 주최했으며, 돌봄을 지역사회 전체가 함께 풀어야 할 공적 과제로 확인했습니다.'
   },
   {
     year: '2026',
-    period: '2026. 4월~9월',
+    period: '2026. 3. 26.',
+    tag: '네트워크',
+    title: '사회연대경제로 연결하는 돌봄플랫폼 포럼',
+    date: '2026년 3월 26일',
+    desc: '부천시청 소통마당에서 22개 사회연대경제 조직이 참여해 부천형 통합돌봄 플랫폼의 방향을 논의했습니다.',
+    thumbnail: 'assets/press-erounnet-platform-forum.png',
+    photos: ['assets/press-erounnet-platform-forum.png', 'assets/press-saengsaengbucheon-discussion.png', 'assets/press-saengsaengbucheon-forum.png'],
+    content: '돌봄통합지원법 시행을 앞두고 열린 포럼에서는 협동조합, 사회적기업, 마을공동체, 비영리조직 등 사회연대경제 조직들이 부천형 통합돌봄 플랫폼의 방향과 공동 실천 의지를 확인했습니다.\n\n기조발제, 지역 사회연대경제 리더 토크콘서트, 참가자 라운드테이블을 통해 돌봄이 시장의 돈벌이 수단이 아니라 사람과 공동체의 권리로 자리 잡아야 한다는 문제의식을 공유했습니다.'
+  },
+  {
+    year: '2026',
+    period: '2026. 6. 18.',
+    tag: '리빙랩',
+    title: '부천사회연대경제 통합돌봄 리빙랩 제2차 라운드테이블',
+    date: '2026년 6월 18일 오후 3시~6시',
+    desc: '스페이스작에서 21개 단체 44명 이상이 참여해 공동브랜드, 통합돌봄 패키지, 마을 자원 연결형 플랫폼을 논의했습니다.',
+    thumbnail: 'assets/result-roundtable-main.jpeg',
+    photos: ['assets/result-roundtable-main.jpeg', 'assets/result-roundtable-board.jpeg', 'assets/result-roundtable-group1.jpeg'],
+    content: '제2차 라운드테이블의 핵심은 “각자의 돌봄에서, 함께 만드는 돌봄으로” 전환하는 것이었습니다.\n\n참여자들은 의료기관, 사회복지기관, 사회적기업, 협동조합, 마을공동체, 도서관, 교육기관, 자원봉사단체 등 부천 안의 다양한 자원을 주민의 욕구에 맞게 연결하는 플랫폼이 필요하다는 점을 확인했습니다.\n\n공동브랜드 방향으로는 지역사회가 함께 운영하는 통합돌봄 플랫폼을 제안했고, 안부ON·자립ON·건강ON·동행ON·생활ON 등 5대 통합돌봄 패키지를 논의했습니다.'
+  },
+  {
+    year: '2026',
+    period: '2026. 7. 17.',
     tag: '공동사업',
-    title: '자원조사·모델설계·시범사업 리빙랩 추진',
-    desc: '지역 돌봄 자원조사와 간담회, 모델 설계, 시범사업 리빙랩을 통해 부천형 통합돌봄 실행 모델을 준비합니다.',
-    details: [
-      { label: '기간', value: '2026년 4월~9월' },
-      { label: '추진 과정', value: '자원조사 및 지역간담회 → 통합돌봄 모델 설계 → 시범사업 리빙랩 운영' },
-      { label: '목표', value: '참여기관의 실제 서비스와 지역 자원을 연결해 시민이 체감할 수 있는 통합돌봄 실행 모델을 만듭니다.' }
-    ]
+    title: '라운드테이블 후속 참여의향조사 결과 정리',
+    date: '2026년 7월 17일',
+    desc: '후속 참여 신청 22건을 19개 조직으로 통합 정리하고, 3개 리빙랩 주제별 참여조직과 제공 자원을 분석했습니다.',
+    thumbnail: 'assets/result-roundtable-board.jpeg',
+    photos: ['assets/result-roundtable-board.jpeg', 'assets/result-roundtable-group1.jpeg'],
+    content: '라운드테이블 이후 제출된 후속 참여 신청을 정리해 어떤 조직이 후속 사업에 참여하려 하는지, 각 조직이 제공할 수 있는 자원이 무엇인지, 참여 조직들의 관심이 높은 주제와 파일럿이 무엇인지 확인했습니다.\n\n가장 넓은 관심 주제는 거점공간과 관계망이었고, 치매·경도인지장애·발달장애, 1인가구 주제로 실행그룹을 구성할 수 있는 기반이 확인되었습니다.'
+  },
+  {
+    year: '2026',
+    period: '2026. 7. 24.',
+    tag: '리빙랩',
+    title: '사회연대경제 통합돌봄 리빙랩 운영계획 확정',
+    date: '2026년 7월 24일',
+    desc: '3개 팀의 참여조직과 기관별 보유자원, 회의·교육·현장실행·평가 구조를 운영계획 산출물로 확정했습니다.',
+    thumbnail: 'assets/result-roundtable-main.jpeg',
+    photos: ['assets/result-roundtable-main.jpeg', 'assets/result-roundtable-board.jpeg'],
+    content: '라운드테이블 후속 참여의향조사와 확정 명단을 기준으로 3개 리빙랩 그룹의 참여조직을 구성하고, 기관별 보유자원과 운영 구조를 정리했습니다.\n\n운영계획은 회의, 교육·자문, 현장 리빙랩, 사례회의·평가로 이어지며, 거점공간과 관계망, 치매·인지·발달장애, 1인가구 주제별로 세부 역할을 계속 구체화해 나가는 방식입니다.'
   }
 ];
 
@@ -1005,6 +1121,7 @@ function openDetailModal(payload) {
   const metaEl = document.getElementById('modal-meta');
   const detailsEl = document.getElementById('modal-details');
   const thumbEl = document.getElementById('modal-thumb');
+  const galleryEl = document.getElementById('modal-gallery');
   const actionsEl = document.getElementById('modal-actions');
 
   titleEl.textContent = payload.title || '상세 내용';
@@ -1012,6 +1129,8 @@ function openDetailModal(payload) {
   detailsEl.innerHTML = '';
   actionsEl.innerHTML = '';
   actionsEl.style.display = 'none';
+  galleryEl.innerHTML = '';
+  galleryEl.style.display = 'none';
 
   if (payload.thumbnail) {
     thumbEl.src = payload.thumbnail;
@@ -1019,6 +1138,16 @@ function openDetailModal(payload) {
   } else {
     thumbEl.removeAttribute('src');
     thumbEl.style.display = 'none';
+  }
+
+  if (payload.photos && payload.photos.length > 1) {
+    payload.photos.forEach((photo, index) => {
+      const img = document.createElement('img');
+      img.src = photo;
+      img.alt = `${payload.title || '사진'} ${index + 1}`;
+      galleryEl.appendChild(img);
+    });
+    galleryEl.style.display = 'grid';
   }
 
   (payload.meta || []).forEach(m => {
@@ -1081,11 +1210,11 @@ function renderResultsTo(containerId, useFilter = false) {
   list.forEach(r => {
     const c = document.createElement('div');
     c.className = 'result-card clickable-card';
-    const yearLabel = r.year ? `${escapeHtml(r.year)}년` : '';
+    const dateLabel = r.period || (r.year ? `${r.year}년` : '');
     const tagClass = escapeHtml(r.tag || '');
     c.innerHTML = `
       ${r.thumbnail ? `<img class="card-thumb" src="${escapeHtml(r.thumbnail)}" alt="${escapeHtml(r.title)}">` : ''}
-      <div class="r-year">${yearLabel}</div>
+      <div class="r-year">${escapeHtml(dateLabel)}</div>
       <div class="r-tag ${tagClass}">${escapeHtml(r.tag)}</div>
       <div class="r-card-title">${escapeHtml(r.title)}</div>
       <div class="r-card-desc">${escapeHtml(r.desc)}</div>
@@ -1093,10 +1222,13 @@ function renderResultsTo(containerId, useFilter = false) {
     c.addEventListener('click', () => openDetailModal({
       title: r.title,
       thumbnail: r.thumbnail,
-      meta: [r.tag, yearLabel, r.period].filter(Boolean),
+      photos: r.photos,
+      meta: [r.tag, r.period].filter(Boolean),
       details: [
-        ...(r.desc ? [{ label: '요약', value: r.desc }] : []),
-        ...(r.details || [])
+        { label: '사업명', value: r.title },
+        { label: '일시', value: r.date || r.period },
+        { label: '내용', value: r.content || r.desc },
+        { label: '사진', value: `${(r.photos || []).length || (r.thumbnail ? 1 : 0)}장` }
       ],
       link: r.link,
       actionLabel: '관련 자료 보기'
@@ -1166,7 +1298,7 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links button').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  const tabs = {home:0, about:1, orgs:2, biz:3, join:4, news:5};
+  const tabs = {home:0, about:1, orgs:2, biz:3, livinglab:4, join:5, news:6};
   document.querySelectorAll('.nav-links button')[tabs[id]].classList.add('active');
   window.scrollTo(0, 0);
 }
